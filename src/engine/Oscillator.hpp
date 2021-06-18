@@ -67,7 +67,7 @@ private:
 	uint64_t bufSize;
 	double ** buffers;
 	uint8_t * lru;
-	double * channelFrequencies;
+	double * channelFrequencies; // Needed for end of MIDI note signal
 	bool portmento;
 	Tuner * tuner;
 };

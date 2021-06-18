@@ -55,6 +55,15 @@ Oscillator::~Oscillator() {
  * Adds a MIDI note to the next available channel.
  * */
 void addMidiNote(uint8_t midiNumber) {
+	uint8_t channel = getNextFreeBuffer();
+	if (!this->portmento) {
+		double f = this->tuner.getFrequency(midiNumber);
+		channelFrequencies[channel] = f;
+		this->rebuildBuffer(f, 44100, channel);
+	}
+	else {
+		// TODO: portmento not implemented yet
+	}
 	
 }
 void endMidiNote(uint8_t midiNumber) {

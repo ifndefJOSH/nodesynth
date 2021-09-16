@@ -18,15 +18,34 @@
 
 class Tuner {
 public:
+	/**
+	 * Constructor - creates tuning for this tuner based on A4 frequency
+	 * 
+	 * @param a4 Frequency of A4
+	 * */
 	Tuner(double a4) {
+		updateTuning(a4);
+	}
+	~Tuner();
+	/**
+	 * Gets the frequency associated with a certain MIDI note
+	 * 
+	 * @param midi Midi note number
+	 * @return Frequency of MIDI note at this tuner's tuning
+	 * */
+	double getFrequency(uint8_t midi) { return this->frequencies[midi]; }
+	/**
+	 * Updates the tuning with a new A4 frequency
+	 * 
+	 * @param a4 Frequency of A4
+	 * */
+	void updateTuning(double a4) {
 		for (int i = 0; i < 128; i++) {
 			frequencies[i] = a4 * pow(2.0, ((double) i - 69) / 12.0);
 		}
 	}
-	~Tuner();
-	double getFrequency(uint8_t midi) { return this->frequencies[i]; }
 private:
-	double[128] frequencies;
+	double frequencies[128];
 	
 };
 

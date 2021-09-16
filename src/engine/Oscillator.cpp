@@ -7,9 +7,11 @@
  * 
  * This file is licensed under the TODO license. It may be copied and modified, as 
  * well as redistributed, so long as a copy of that license is provided along with
- * this software. This is part of the NODESYTH project, which is also under that license.
+ * this software. This is part of the NODESYNTH project, which is also under that license.
  **********************************************************************************/
+
 #include "Oscillator.hpp"
+
 /**
  * Constructor for the `Oscillator` class. Takes a default buffer size and the number of desired channels.
  * The default type of oscillator is `SINE`, so this method sets the osctype to `SINE`.
@@ -17,7 +19,7 @@
  * @param bufsize The size of the buffers to use.
  * @param numChannels The number of MIDI channels to use.
  * 
- * @return Instance of `Oscillator` class with 
+ * @return Instance of `Oscillator` class with a certain number of channels and tuner
  * */
 Oscillator::Oscillator(uint64_t bufSize, uint8_t numChannels, Tuner * tuner) {
 	// Portmeto is disabled by default
@@ -33,11 +35,13 @@ Oscillator::Oscillator(uint64_t bufSize, uint8_t numChannels, Tuner * tuner) {
 	for (int i = 0; i < numChannels; i++) {
 		this->buffers[i] = new double[bufSize];
 	}
-	this->output = new double[bufSize];
+	// this->output = new double[bufSize];
 	// Create channel frequencies array
-	this->channelFrequencies = new double[numChannels];
+	this->channelNotes = new uint8_t[numChannels];
 	// Point this to the global tuner
 	this->tuner = tuner;
+	// Channel switches
+	this->channelOn = new bool[numChannels];
 }
 /**
  * Destructor for the `Oscillator` class. Cleans up memory used.
@@ -48,29 +52,100 @@ Oscillator::~Oscillator() {
 	}
 	delete this->buffers;
 	delete this->lru;
-	delete this->output;
-	delete this->channelFrequencies;
+	// delete this->output;
+	delete this->channelNotes;
+	delete this->channelOn;
+	delete this->tuner;
 }
 /**
  * Adds a MIDI note to the next available channel.
+ * 
+ * @param midiNumber The MIDI number to turn on.
  * */
-void addMidiNote(uint8_t midiNumber) {
-	uint8_t channel = getNextFreeBuffer();
-	if (!this->portmento) {
-		double f = this->tuner.getFrequency(midiNumber);
-		channelFrequencies[channel] = f;
-		this->rebuildBuffer(f, 44100, channel);
+void Oscillator::addMidiNote(uint8_t midiNumber) {
+	// If a channel exists already playing this note, use that channel
+	uint8_t channel = searchNote(midiNumber);
+	if (channel == NOT_IN_CHANNELS) {
+		channel = this->getNextFreeBuffer(); // Channel turned on in getNextFreeBuffer()
+		// This only has to be on here if we are rebuilding the channel's buffer
+		if (!this->portmento) {
+			double f = tuner->getFrequency(midiNumber);
+			channelNotes[channel] = midiNumber;
+			this->rebuildBuffer(f, 44100, channel);
+		}
+		else {
+			// TODO: portmento not implemented yet
+			std::cerr << "Portmento not implemented yet. Skipping this note.\n";
+			this->portmento = false;
+		}
 	}
 	else {
-		// TODO: portmento not implemented yet
+		// The only thing that has to be done is to turn on this channel
+		channelOn[channel] = true;
 	}
 	
 }
-void endMidiNote(uint8_t midiNumber) {
+/**
+ * Sets up the IO ports for the `Node` class inheritance
+ * */
+void Oscillator::setUpIO() {
+    /* 
+    Oscillator Node has 2 inputs:
+        1. MIDI data
+        2. Pitch wheel
+    And one output:
+        1. Sound
+    */
+   this->numInputs = 2;
+   this->numOutputs = 1;
+   this->inputs = new (void *)[2];
+   this->inputs[0] = new float[bufSize];
+   this->inputs[1] = new float[bufSize];
+   this->inputTypes = new uint8_t[2];
+   inputTypes[0] = IOTypes::MIDI;
+   inputTypes[1] = IOTypes::FLOAT; // Float is in cents, so 1200.0 is one octave
+   this->outputBuffers = new (void *)[1];
+   this->bufferTypes = new uint8_t[1];
+   bufferTypes[0] = IOTypes::AUDIO;
+
+}
+/**
+ * Turns off a MIDI note. Prints an error and returns if termination signal is sent to a note that does not exist.
+ * 
+ * @param midiNumber The MIDI number to turn off.
+ * */
+void Oscillator::endMidiNote(uint8_t midiNumber) {
+	uint8_t channel = searchNote(midiNumber);
+	if (channel == NOT_IN_CHANNELS) {
+		std::cerr << "[ERROR]: MIDI note " << midiNumber << " received end signal but is not in channels." << std::endl;
+		return;
+	}
+	// Assumes is in channels
+	channelOn[channel] = false;
 	
 }
-void changeNumChannels(uint8_t numChannels) {
-	
+/**
+ * Searches for a MIDI note in the existing channels and returns the channel
+ * 
+ * Iterates through all the MIDI channels to see what note is currently playing
+ * 
+ * @param midiNumber The MIDI number to find.
+ * */
+uint8_t Oscillator::searchNote(uint8_t midiNumber) {
+	for (int i = 0; i < numChannels; i++) {
+		if (channelNotes[i] == midiNumber) {
+			return i;
+		}
+	}
+	return NOT_IN_CHANNELS;
+}
+/**
+ * Changes the number of channels in the Oscillator
+ * 
+ * @param numChannels The number of channels to change it to
+ * */
+void Oscillator::changeNumChannels(uint8_t numChannels) {
+	// TODO: Implement function
 }
 
 /**
@@ -84,7 +159,8 @@ void changeNumChannels(uint8_t numChannels) {
  * */
 void Oscillator::rebuildBuffer(double freq, uint16_t samplingRate, uint8_t channel) {
 	if (freq > (double) samplingRate / 2) {
-		std::err << "[WARNING]: frequency " << freq << " is greater than Nyquist frequency for sampling rate " << samplingRate << std::endl;
+		std::cerr << "[WARNING]: frequency " << freq << " is greater than Nyquist frequency for sampling rate " 
+			<< samplingRate << std::endl;
 	}
 	switch (this->osctype) {
 		case SINE:
@@ -106,7 +182,8 @@ void Oscillator::rebuildBuffer(double freq, uint16_t samplingRate, uint8_t chann
 			buildAbsine(freq, samplingRate, channel);
 			break;
 		default:
-			std::err << "[ERROR]: oscillator type " << this->osctype << " is not defined. Please reference the osctype enum in the source code\n";
+			std::cerr << "[ERROR]: oscillator type " << this->osctype 
+				<< " is not defined. Please reference the osctype enum in the source code\n";
 	}
 	// Get samples per period
 	uint16_t samplesPerPeriod = samplingRate / freq + 1;
@@ -118,7 +195,7 @@ void Oscillator::rebuildBuffer(double freq, uint16_t samplingRate, uint8_t chann
 	// TODO: Store it in the class instance
 	
 	// Now that the buffers have changed, the output buffer must change as well
-	fillOutputBuffer();
+	updateBuffer();
 }
 /**
  * Builds a sine wave in the frequency domain for the specific frequency and specific channel.
@@ -152,7 +229,7 @@ void Oscillator::buildSine(double freq, uint16_t samplingRate, uint8_t channel) 
  * */
 void Oscillator::buildSquare(double freq, uint16_t samplingRate, uint8_t channel) {
 	double * buffer = this->buffers[channel];
-	uint32_t samplesPerPeriod = samplingRate / f;
+	uint32_t samplesPerPeriod = samplingRate / freq;
 	double * y = new double[bufSize];
 	// Create our wave in the time domain
 	for (int i = 0; i < bufSize; i++) {
@@ -186,7 +263,7 @@ void Oscillator::buildSquare(double freq, uint16_t samplingRate, uint8_t channel
  * */
 void Oscillator::buildTriangle(double freq, uint16_t samplingRate, uint8_t channel) {
 	double * buffer = this->buffers[channel];
-	uint32_t samplesPerPeriod = samplingRate / f;
+	uint32_t samplesPerPeriod = samplingRate / freq;
 	double * y = new double[bufSize];
 	// Create our wave in the time domain
 	uint16_t quarterBuf = bufsize / 4;
@@ -224,6 +301,7 @@ void Oscillator::buildTriangle(double freq, uint16_t samplingRate, uint8_t chann
  * @param channel The channel to add the sawtooth wave to
  * */
 void Oscillator::buildSawtooth(double freq, uint16_t samplingRate, uint8_t channel) {
+	double * buffer = this->buffers[channel];
 	double * y = new double[bufSize];
 	double incrementRate = 2 * freq * samplingRate;
 	y[0] = -1;
@@ -257,6 +335,7 @@ void Oscillator::buildSawtooth(double freq, uint16_t samplingRate, uint8_t chann
  * @param channel The channel to add the pulse wave to
  * */
 void Oscillator::buildPulse(double freq, uint16_t samplingRate, uint8_t channel) {
+	double * buffer = this->buffers[channel];
 	double * y = new double[bufSize];
 	y[0] = 0;
 	// Build in the time domain
@@ -286,6 +365,7 @@ void Oscillator::buildPulse(double freq, uint16_t samplingRate, uint8_t channel)
  * @param channel The channel to add the absolute value sine wave to
  * */
 void Oscillator::buildAbsine(double freq, uint16_t samplingRate, uint8_t channel) {
+	double * buffer = this->buffers[channel];
 	double * y = new double[bufSize];
 	double t;
 	y[0] = 0;
@@ -312,15 +392,20 @@ void Oscillator::buildAbsine(double freq, uint16_t samplingRate, uint8_t channel
  * Takes each of the buffers and elementwise adds them and places those in the output buffer. 
  * This method is called every time a buffer update is triggered (by either a new MIDI note 
  * or a change in the portmento frequency). No parameters, no return value.
+ * 
+ * Override of `Node` method
  * */
-void Oscillator::fillOutputBuffer() {
+void Oscillator::updateBuffer() {
 	// For each sample in the buffer
 	for (int i = 0; i < bufSize; i++) {
-		output[i] = 0;
+		outputBuffers[i] = 0;
 		// Loop through each channel and add its value to the output buffer
 		for (int j = 0; j < numChannels; j++) {
-			// Does not check for clipping
-			output += buffers[j][i];
+			// Only include channels being used.
+			if (channelOn[j]) {
+				// Does not check for clipping
+				outputBuffers += buffers[j][i];
+			}
 		}
 	}
 }
@@ -332,6 +417,8 @@ void Oscillator::fillOutputBuffer() {
  * we could have what I call a "channel leak" (channels increasingly become unavailable as
  * next free buffer is polled without use). LRU prevents there never from being a channel
  * available however.
+ * 
+ * @return The index of the next free channel
  * */
 uint8_t Oscillator::getNextFreeBuffer() {
 	int index = 0;
@@ -342,5 +429,6 @@ uint8_t Oscillator::getNextFreeBuffer() {
 		lru[i]++;
 	}
 	lru[index] = 0;
+	channelOn[index] = true;
 	return index;
 }

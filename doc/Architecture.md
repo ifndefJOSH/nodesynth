@@ -22,7 +22,11 @@
 	- `CompressorNode`: "Compresses" audio with optional makeup gain.
 	- `LimiterNode`: Limits audio to a certain Amplitude.
 2. `Filter`: An object which filters, using `fftw`, an input stream with a filter shape, which is encased in its parent `Node`.
-3. `DataStream`: a
+3. `DataStream`: contains buffers for certain types of data
+	- `AudioDataStream`: Stream for monaural audio in `double` floating point precision
+	- `ChanneledAudioDataStream`: Stream for monaural audio, separated by MIDI channel.
+	- `MidiStream`: Stream for MIDI notes
+	- `PrimitiveDataStream<Type>`: (templated) stream for primitive types
 
 ## Undecided questions
 

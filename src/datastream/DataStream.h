@@ -11,7 +11,8 @@
  **/
 		
 
-#include <DataStream.h>
+#ifndef DATASTREAM_H_INCLUDED
+#define DATASTREAM_H_INCLUDED
 
 namespace nodesynth {
 	 class DataStream {
@@ -21,3 +22,4 @@ namespace nodesynth {
 	private:
 	};
 } // namespace nodesynth
+#endif // DATASTREAM_H_INCLUDED

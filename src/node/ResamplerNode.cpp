@@ -1,3 +1,3 @@
-#include ResamplerNode.h
+#include "ResamplerNode.h"
 
 using namespace nodesynth;

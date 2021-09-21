@@ -1,3 +1,3 @@
-#include CompressorNode.h
+#include "CompressorNode.h"
 
 using namespace nodesynth;

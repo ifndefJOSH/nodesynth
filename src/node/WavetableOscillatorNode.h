@@ -11,13 +11,17 @@
  **/
 		
 
-#include <Node.h>
+#ifndef WAVETABLEOSCILLATORNODE_H_INCLUDED
+#define WAVETABLEOSCILLATORNODE_H_INCLUDED
+
+#include "Node.h"
 
 namespace nodesynth {
-	 class WavetableOscillatorNode {
+	 class WavetableOscillatorNode : Node {
 	public:
 		WavetableOscillatorNode();
 	protected:
 	private:
 	};
 } // namespace nodesynth
+#endif // WAVETABLEOSCILLATORNODE_H_INCLUDED

@@ -1,3 +1,3 @@
-#include WavetableOscillatorNode.h
+#include "WavetableOscillatorNode.h"
 
 using namespace nodesynth;

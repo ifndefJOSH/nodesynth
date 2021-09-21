@@ -1,3 +1,3 @@
-#include PanningNode.h
+#include "PanningNode.h"
 
 using namespace nodesynth;

@@ -1,3 +1,3 @@
-#include EQNode.h
+#include "EQNode.h"
 
 using namespace nodesynth;

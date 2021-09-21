@@ -11,6 +11,9 @@
  **/
 
 
+#ifndef NODE_H_INCLUDED
+#define NODE_H_INCLUDED
+
 namespace nodesynth {
 	class Node {
 	public:
@@ -19,3 +22,5 @@ namespace nodesynth {
 	private:
 	};
 } // namespace nodesynth
+
+#endif // NODE_H_INCLUDED

@@ -11,13 +11,17 @@
  **/
 		
 
-#include <Node.h>
+#ifndef FORMANTNODE_H_INCLUDED
+#define FORMANTNODE_H_INCLUDED
+
+#include "Node.h"
 
 namespace nodesynth {
-	 class FormantNode {
+	 class FormantNode : Node {
 	public:
 		FormantNode();
 	protected:
 	private:
 	};
 } // namespace nodesynth
+#endif // FORMANTNODE_H_INCLUDED

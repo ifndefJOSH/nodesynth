@@ -11,13 +11,17 @@
  **/
 		
 
-#include <Node.h>
+#ifndef EQNODE_H_INCLUDED
+#define EQNODE_H_INCLUDED
+
+#include "Node.h"
 
 namespace nodesynth {
-	 class EQNode {
+	 class EQNode : Node {
 	public:
 		EQNode();
 	protected:
 	private:
 	};
 } // namespace nodesynth
+#endif // EQNODE_H_INCLUDED

@@ -1,3 +1,3 @@
-#include EnvelopeNode.h
+#include "EnvelopeNode.h"
 
 using namespace nodesynth;

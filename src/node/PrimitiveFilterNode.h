@@ -11,13 +11,17 @@
  **/
 		
 
-#include <Node.h>
+#ifndef PRIMITIVEFILTERNODE_H_INCLUDED
+#define PRIMITIVEFILTERNODE_H_INCLUDED
+
+#include "Node.h"
 
 namespace nodesynth {
-	 class PrimitiveFilterNode {
+	 class PrimitiveFilterNode : Node {
 	public:
 		PrimitiveFilterNode();
 	protected:
 	private:
 	};
 } // namespace nodesynth
+#endif // PRIMITIVEFILTERNODE_H_INCLUDED

@@ -1,3 +1,3 @@
-#include DataStream.h
+#include "DataStream.h"
 
 using namespace nodesynth;

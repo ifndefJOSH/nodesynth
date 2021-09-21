@@ -1,3 +1,3 @@
-#include ChorusNode.h
+#include "ChorusNode.h"
 
 using namespace nodesynth;

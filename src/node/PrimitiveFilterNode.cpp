@@ -1,3 +1,3 @@
-#include PrimitiveFilterNode.h
+#include "PrimitiveFilterNode.h"
 
 using namespace nodesynth;

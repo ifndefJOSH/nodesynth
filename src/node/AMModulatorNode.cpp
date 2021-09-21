@@ -1,3 +1,3 @@
-#include AMModulatorNode.h
+#include "AMModulatorNode.h"
 
 using namespace nodesynth;

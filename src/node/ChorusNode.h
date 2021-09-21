@@ -11,13 +11,17 @@
  **/
 		
 
-#include <Node.h>
+#ifndef CHORUSNODE_H_INCLUDED
+#define CHORUSNODE_H_INCLUDED
+
+#include "Node.h"
 
 namespace nodesynth {
-	 class ChorusNode {
+	 class ChorusNode : Node {
 	public:
 		ChorusNode();
 	protected:
 	private:
 	};
 } // namespace nodesynth
+#endif // CHORUSNODE_H_INCLUDED

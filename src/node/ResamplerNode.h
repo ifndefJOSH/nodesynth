@@ -11,13 +11,17 @@
  **/
 		
 
-#include <Node.h>
+#ifndef RESAMPLERNODE_H_INCLUDED
+#define RESAMPLERNODE_H_INCLUDED
+
+#include "Node.h"
 
 namespace nodesynth {
-	 class ResamplerNode {
+	 class ResamplerNode : Node {
 	public:
 		ResamplerNode();
 	protected:
 	private:
 	};
 } // namespace nodesynth
+#endif // RESAMPLERNODE_H_INCLUDED

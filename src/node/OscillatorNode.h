@@ -11,13 +11,17 @@
  **/
 		
 
-#include <Node.h>
+#ifndef OSCILLATORNODE_H_INCLUDED
+#define OSCILLATORNODE_H_INCLUDED
+
+#include "Node.h"
 
 namespace nodesynth {
-	 class OscillatorNode {
+	 class OscillatorNode : Node {
 	public:
 		OscillatorNode();
 	protected:
 	private:
 	};
 } // namespace nodesynth
+#endif // OSCILLATORNODE_H_INCLUDED

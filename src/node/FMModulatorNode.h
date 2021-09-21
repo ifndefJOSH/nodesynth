@@ -11,13 +11,17 @@
  **/
 		
 
-#include <Node.h>
+#ifndef FMMODULATORNODE_H_INCLUDED
+#define FMMODULATORNODE_H_INCLUDED
+
+#include "Node.h"
 
 namespace nodesynth {
-	 class FMModulatorNode {
+	 class FMModulatorNode : Node {
 	public:
 		FMModulatorNode();
 	protected:
 	private:
 	};
 } // namespace nodesynth
+#endif // FMMODULATORNODE_H_INCLUDED

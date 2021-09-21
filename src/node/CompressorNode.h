@@ -11,13 +11,17 @@
  **/
 		
 
-#include <Node.h>
+#ifndef COMPRESSORNODE_H_INCLUDED
+#define COMPRESSORNODE_H_INCLUDED
+
+#include "Node.h"
 
 namespace nodesynth {
-	 class CompressorNode {
+	 class CompressorNode : Node {
 	public:
 		CompressorNode();
 	protected:
 	private:
 	};
 } // namespace nodesynth
+#endif // COMPRESSORNODE_H_INCLUDED

@@ -1,3 +1,3 @@
-#include FilterNode.h
+#include "FilterNode.h"
 
 using namespace nodesynth;

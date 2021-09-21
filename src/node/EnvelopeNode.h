@@ -11,13 +11,17 @@
  **/
 		
 
-#include <Node.h>
+#ifndef ENVELOPENODE_H_INCLUDED
+#define ENVELOPENODE_H_INCLUDED
+
+#include "Node.h"
 
 namespace nodesynth {
-	 class EnvelopeNode {
+	 class EnvelopeNode : Node {
 	public:
 		EnvelopeNode();
 	protected:
 	private:
 	};
 } // namespace nodesynth
+#endif // ENVELOPENODE_H_INCLUDED

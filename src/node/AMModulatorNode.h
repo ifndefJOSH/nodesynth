@@ -11,13 +11,17 @@
  **/
 		
 
-#include <Node.h>
+#ifndef AMMODULATORNODE_H_INCLUDED
+#define AMMODULATORNODE_H_INCLUDED
+
+#include "Node.h"
 
 namespace nodesynth {
-	 class AMModulatorNode {
+	 class AMModulatorNode : Node {
 	public:
 		AMModulatorNode();
 	protected:
 	private:
 	};
 } // namespace nodesynth
+#endif // AMMODULATORNODE_H_INCLUDED

@@ -4,8 +4,8 @@ project(nodesynth)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(FFTW_MIN_VERSION "3.3.10")
-find_package(fftw ${FFTW_MIN_VERSION} REQUIRED)
+set(FFTW_MIN_VERSION "3.3.9")
+find_package(FFTW3 ${FFTW_MIN_VERSION} REQUIRED)
 
 set(SOURCE_FILES
 	src/main.cpp

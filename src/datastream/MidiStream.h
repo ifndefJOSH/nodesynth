@@ -11,7 +11,10 @@
  **/
 		
 
-#include <DataStream.h>
+#ifndef MIDISTREAM_H_INCLUDED
+#define MIDISTREAM_H_INCLUDED
+
+#include "DataStream.h"
 
 namespace nodesynth {
 	 class MidiStream {
@@ -21,3 +24,4 @@ namespace nodesynth {
 	private:
 	};
 } // namespace nodesynth
+#endif // MIDISTREAM_H_INCLUDED

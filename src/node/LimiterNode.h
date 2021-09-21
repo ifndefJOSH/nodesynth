@@ -11,13 +11,17 @@
  **/
 		
 
-#include <Node.h>
+#ifndef LIMITERNODE_H_INCLUDED
+#define LIMITERNODE_H_INCLUDED
+
+#include "Node.h"
 
 namespace nodesynth {
-	 class LimiterNode {
+	class LimiterNode : Node {
 	public:
 		LimiterNode();
 	protected:
 	private:
 	};
 } // namespace nodesynth
+#endif // LIMITERNODE_H_INCLUDED

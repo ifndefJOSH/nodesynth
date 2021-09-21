@@ -1,3 +1,3 @@
-#include PrimitiveOscillatorNode.h
+#include "PrimitiveOscillatorNode.h"
 
 using namespace nodesynth;

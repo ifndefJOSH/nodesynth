@@ -1,3 +1,3 @@
-#include FMModulatorNode.h
+#include "FMModulatorNode.h"
 
 using namespace nodesynth;

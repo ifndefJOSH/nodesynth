@@ -1,3 +1,3 @@
-#include SamplerNode.h
+#include "SamplerNode.h"
 
 using namespace nodesynth;

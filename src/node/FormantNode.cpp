@@ -1,3 +1,3 @@
-#include FormantNode.h
+#include "FormantNode.h"
 
 using namespace nodesynth;

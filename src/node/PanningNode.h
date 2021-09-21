@@ -11,13 +11,17 @@
  **/
 		
 
-#include <Node.h>
+#ifndef PANNINGNODE_H_INCLUDED
+#define PANNINGNODE_H_INCLUDED
+
+#include "Node.h"
 
 namespace nodesynth {
-	 class PanningNode {
+	 class PanningNode : Node {
 	public:
 		PanningNode();
 	protected:
 	private:
 	};
 } // namespace nodesynth
+#endif // PANNINGNODE_H_INCLUDED

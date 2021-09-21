@@ -1,3 +1,3 @@
-#include OscillatorNode.h
+#include "OscillatorNode.h"
 
 using namespace nodesynth;

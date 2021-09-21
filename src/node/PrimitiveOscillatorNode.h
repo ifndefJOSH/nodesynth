@@ -11,13 +11,17 @@
  **/
 		
 
-#include <Node.h>
+#ifndef PRIMITIVEOSCILLATORNODE_H_INCLUDED
+#define PRIMITIVEOSCILLATORNODE_H_INCLUDED
+
+#include "Node.h"
 
 namespace nodesynth {
-	 class PrimitiveOscillatorNode {
+	 class PrimitiveOscillatorNode : Node {
 	public:
 		PrimitiveOscillatorNode();
 	protected:
 	private:
 	};
 } // namespace nodesynth
+#endif // PRIMITIVEOSCILLATORNODE_H_INCLUDED

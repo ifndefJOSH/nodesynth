@@ -11,13 +11,17 @@
  **/
 		
 
-#include <Node.h>
+#ifndef SAMPLERNODE_H_INCLUDED
+#define SAMPLERNODE_H_INCLUDED
+
+#include "Node.h"
 
 namespace nodesynth {
-	 class SamplerNode {
+	 class SamplerNode : Node {
 	public:
 		SamplerNode();
 	protected:
 	private:
 	};
 } // namespace nodesynth
+#endif // SAMPLERNODE_H_INCLUDED

@@ -9,7 +9,9 @@
  * which aims to create a declarative Prolog-like language for musical synthesis. Eventually, I
  * also plan to create a GUI, similar to those in Blender, Natron, or Carla.
  **/
-		
+
+#ifndef PRIMITIVE_DATA_STREAM_H_INCLUDED
+#define PRIMITIVE_DATA_STREAM_H_INCLUDED
 
 #include "DataStream.h"
 
@@ -21,3 +23,6 @@ namespace nodesynth {
 	private:
 	};
 } // namespace nodesynth
+
+
+#endif // PRIMITIVE_DATA_STREAM_H_INCLUDED

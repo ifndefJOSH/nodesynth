@@ -1,3 +1,3 @@
-#include ChanneledAudioDataStream.h
+#include "ChanneledAudioDataStream.h"
 
 using namespace nodesynth;

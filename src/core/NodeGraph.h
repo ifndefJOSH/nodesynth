@@ -9,6 +9,9 @@
 * also plan to create a GUI, similar to those in Blender, Natron, or Carla.
 **/
 
+#ifndef NODEGRAPH_H_INCLUDED
+#define NODEGRAPH_H_INCLUDED
+
 #include "../node/Node.h"
 #include "PresetParser.cpp"
 
@@ -36,3 +39,5 @@ namespace nodesynth {
 			std::shared_ptr<std::thread> workerThread;
 	};
 }
+
+#endif // NODEGRAPH_H_INCLUDED

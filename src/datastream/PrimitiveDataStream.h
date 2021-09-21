@@ -11,10 +11,10 @@
  **/
 		
 
-#include <DataStream.h>
+#include "DataStream.h"
 
 namespace nodesynth {
-	 class PrimitiveDataStream {
+	class PrimitiveDataStream {
 	public:
 		PrimitiveDataStream();
 	protected:

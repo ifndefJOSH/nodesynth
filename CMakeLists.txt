@@ -9,16 +9,72 @@ find_package(fftw ${FFTW_MIN_VERSION} REQUIRED)
 
 set(SOURCE_FILES
 	src/main.cpp
+	src/core/NodeGraph.cpp
+	src/core/NodeGraph.h
+	src/core/NodeSynth.cpp
+	src/core/NodeSynth.h
+	src/core/PresetParser.cpp
+	src/core/PresetParser.h
+	src/core/cli/messages.cpp
+	src/core/cli/messages.h
 )
 
 set(NODE_FILES
-	src/Node.h
-	src/Node.cpp
+	AMModulatorNode.cpp
+	AMModulatorNode.h
+	ChorusNode.cpp
+	ChorusNode.h
+	CompressorNode.cpp
+	CompressorNode.h
+	EnvelopeNode.cpp
+	EnvelopeNode.h
+	EQNode.cpp
+	EQNode.h
+	FilterNode.cpp
+	FilterNode.h
+	FMModulatorNode.cpp
+	FMModulatorNode.h
+	FormantNode.cpp
+	FormantNode.h
+	LimiterNode.cpp
+	LimiterNode.h
+	ModulatorNode.cpp
+	Node.cpp
+	Node.h
+	OscillatorNode.cpp
+	OscillatorNode.h
+	PanningNode.cpp
+	PanningNode.h
+	PrimitiveFilterNode.cpp
+	PrimitiveFilterNode.h
+	PrimitiveOscillatorNode.cpp
+	PrimitiveOscillatorNode.h
+	ResamplerNode.cpp
+	ResamplerNode.h
+	SamplerNode.cpp
+	SamplerNode.h
+	WavetableOscillatorNode.cpp
+	WavetableOscillatorNode.h
 )
 
 set(FILTER_FILES
-	filter/Filter.h
-	filter/Filter.cpp
+	src/filter/Filter.h
+	src/filter/Filter.cpp
+)
+
+set(DATASTREAM_FILES
+      src/datastream/AudioDataStream.cpp
+      src/datastream/AudioDataStream.h
+      src/datastream/ChanneledAudioDataStream.cpp
+      src/datastream/ChanneledAudioDataStream.h
+      src/datastream/DataStream.cpp
+      src/datastream/DataStream.h
+      src/datastream/MidiStream.cpp
+      src/datastream/MidiStream.h
+      src/datastream/PrimitiveDataStream.cpp
+      src/datastream/PrimitiveDataStream.h
+      src/datastream/TimeDomainAudioStream.cpp
+      src/datastream/TimeDomainAudioStream.h
 )
 
 # To be added when GUI is done
@@ -27,6 +83,6 @@ set(FILTER_FILES
 #	gui/MainWindow.cpp
 #)
 
-add_executable(nodesynth ${SOURCE_FILES} ${NODE_FILES} ${FILTER_FILES})
+add_executable(nodesynth ${SOURCE_FILES} ${NODE_FILES} ${FILTER_FILES} ${DATASTREAM_FILES})
 
-# add_executable(xnodesynth ${SOURCE_FILES} ${NODE_FILES} ${FILTER_FILES} ${GUI_FILES})
+# add_executable(xnodesynth ${SOURCE_FILES} ${NODE_FILES} ${FILTER_FILES} ${DATASTREAM_FILES} ${GUI_FILES})

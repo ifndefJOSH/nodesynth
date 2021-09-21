@@ -11,13 +11,17 @@
  **/
 		
 
-#include <DataStream.h>
+#ifndef AUDIODATASTREAM_H_INCLUDED
+#define AUDIODATASTREAM_H_INCLUDED
+
+#include "DataStream.h"
 
 namespace nodesynth {
-	 class AudioDataStream {
+	class AudioDataStream {
 	public:
 		AudioDataStream();
 	protected:
 	private:
 	};
 } // namespace nodesynth
+#endif // AUDIODATASTREAM_H_INCLUDED

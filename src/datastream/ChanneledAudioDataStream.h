@@ -9,9 +9,12 @@
  * which aims to create a declarative Prolog-like language for musical synthesis. Eventually, I
  * also plan to create a GUI, similar to those in Blender, Natron, or Carla.
  **/
-		
 
-#include <DataStream.h>
+
+#ifndef CHANNELED_AUDIO_DATA_STREAM_INCLUDED
+#define CHANNELED_AUDIO_DATA_STREAM_INCLUDED
+
+#include "DataStream.h"
 
 namespace nodesynth {
 	 class ChanneledAudioDataStream {
@@ -21,3 +24,5 @@ namespace nodesynth {
 	private:
 	};
 } // namespace nodesynth
+
+#endif

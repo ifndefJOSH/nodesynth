@@ -9,15 +9,19 @@
  * which aims to create a declarative Prolog-like language for musical synthesis. Eventually, I
  * also plan to create a GUI, similar to those in Blender, Natron, or Carla.
  **/
-		
 
-#include <DataStream.h>
+#ifndef TIME_DOMAIN_AUDIO_STREAM_H_INCLUDED
+#define TIME_DOMAIN_AUDIO_STREAM_H_INCLUDED
+
+#include "DataStream.h"
 
 namespace nodesynth {
-	 class TimeDomainAudioStream {
+	class TimeDomainAudioStream {
 	public:
 		TimeDomainAudioStream();
 	protected:
 	private:
 	};
 } // namespace nodesynth
+
+#endif // TIME_DOMAIN_AUDIO_STREAM_H_INCLUDED

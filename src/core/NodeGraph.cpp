@@ -26,7 +26,9 @@ NodeGraph::clearWithoutDeleting(){
 }
 void
 NodeGraph::createWorkerThread(){
-
+	// Bind worker thread to function
+	std::function<void(void)> workerProcess = std::bind(&NodeGraph::updateAllBuffers, &this);
+// 	workerThread = std::allocate_shared
 }
 void
 NodeGraph::destroyWorkerThread(){

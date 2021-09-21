@@ -27,6 +27,11 @@
 	- `ChanneledAudioDataStream`: Stream for monaural audio, separated by MIDI channel.
 	- `MidiStream`: Stream for MIDI notes
 	- `PrimitiveDataStream<Type>`: (templated) stream for primitive types
+4. `NodeGraph`: Hashmap of all nodes by name.
+5. `NodeSynth`: Main class instantiated.
+6. `PresetParser`: Parses the preset file and adds nodes to graph
+
+**Memory is exposed** between streams, so as much as OOP abstraction is *nice*, we're not doing it 100%
 
 ## Undecided questions
 

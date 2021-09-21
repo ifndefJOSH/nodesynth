@@ -22,9 +22,15 @@
 	- `CompressorNode`: "Compresses" audio with optional makeup gain.
 	- `LimiterNode`: Limits audio to a certain Amplitude.
 2. `Filter`: An object which filters, using `fftw`, an input stream with a filter shape, which is encased in its parent `Node`.
+	- `OnePoleFilter`: A simple single-pole filter. Can be lowpass, highpass or bandpass
+	- `TwoPoleFilter`: A double-pole filter. Can be lowpass, highpass or bandpass
+	- `IIRFilter`: Creates an infinite impulse response rectangular window filter
+	- `FlangerFilter`: A filter that does flangering
+	- `FormantFilter`: A filter that applies a vocal formant
 3. `DataStream`: contains buffers for certain types of data
-	- `AudioDataStream`: Stream for monaural audio in `double` floating point precision
+	- `AudioDataStream`: Stream for monaural audio in `double` floating point precision (in fourier domain)
 	- `ChanneledAudioDataStream`: Stream for monaural audio, separated by MIDI channel.
+	- `TimeDomainAudioStream`: Audio in the time domain
 	- `MidiStream`: Stream for MIDI notes
 	- `PrimitiveDataStream<Type>`: (templated) stream for primitive types
 4. `NodeGraph`: Hashmap of all nodes by name.

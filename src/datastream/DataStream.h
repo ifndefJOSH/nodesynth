@@ -14,12 +14,36 @@
 #ifndef DATASTREAM_H_INCLUDED
 #define DATASTREAM_H_INCLUDED
 
+#include <string>
+
 namespace nodesynth {
-	 class DataStream {
+
+	enum streamtype {
+		// (Monaural) Audio in frequency domain
+		AUDIO
+		// (Monaural) Audio in frequency domain separated by MIDI channel
+		, CHANNELED_AUDIO
+		// (Monaural) Audio in time domain
+		, TIME_DOMAIN_AUDIO
+		// Midi Events
+		, MIDI
+		// PrimitiveDataStream<type> is forward declared
+		, PRIMITIVE_INTEGER
+		, PRIMITIVE_UNSIGNED_INTEGER
+		, PRIMITIVE_FLOAT
+		, PRIMITIVE_BOOLEAN
+	};
+
+	class DataStream {
 	public:
-		DataStream();
+		DataStream(const std::string name);
+		void connect(const DataStream & ds);
+		const streamtype getStreamType();
+		virtual void updateNext() = 0;
 	protected:
+		const streamtype type;
 	private:
+		const std::string name;
 	};
 } // namespace nodesynth
 #endif // DATASTREAM_H_INCLUDED

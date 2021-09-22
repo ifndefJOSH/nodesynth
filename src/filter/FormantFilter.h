@@ -11,7 +11,10 @@
  **/
 		
 
-#include <Filter.h>
+#ifndef FORMANTFILTER_H_INCLUDED
+#define FORMANTFILTER_H_INCLUDED
+
+#include "Filter.h"
 
 namespace nodesynth {
 	 class FormantFilter {
@@ -21,3 +24,4 @@ namespace nodesynth {
 	private:
 	};
 } // namespace nodesynth
+#endif // FORMANTFILTER_H_INCLUDED

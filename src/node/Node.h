@@ -19,17 +19,21 @@
 #include <memory>
 
 #include "../datastream/DataStream.h"
+#include "../core/Options.h"
 
 namespace nodesynth {
 	class Node {
 	public:
-		Node();
+		Node(const std::string name);
 		~Node();
 		virtual void initializePorts() = 0;
+		virtual void update() = 0;
+		const std::string getName();
 	protected:
 		void addDataStreamToPorts(std::shared_ptr<DataStream> ds);
 	private:
 		std::map<std::string, std::shared_ptr<DataStream>> ports;
+		const std::string name;
 	};
 } // namespace nodesynth
 

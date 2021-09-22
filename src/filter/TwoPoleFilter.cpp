@@ -1,3 +1,3 @@
-#include TwoPoleFilter.h
+#include "TwoPoleFilter.h"
 
 using namespace nodesynth;

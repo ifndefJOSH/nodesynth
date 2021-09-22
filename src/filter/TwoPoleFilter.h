@@ -11,7 +11,10 @@
  **/
 		
 
-#include <Filter.h>
+#ifndef TWOPOLEFILTER_H_INCLUDED
+#define TWOPOLEFILTER_H_INCLUDED
+
+#include "Filter.h"
 
 namespace nodesynth {
 	 class TwoPoleFilter {
@@ -21,3 +24,4 @@ namespace nodesynth {
 	private:
 	};
 } // namespace nodesynth
+#endif // TWOPOLEFILTER_H_INCLUDED

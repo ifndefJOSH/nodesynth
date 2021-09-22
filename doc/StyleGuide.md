@@ -64,7 +64,8 @@ namespace nodesynth {
 }
 ```
 ```
-void functionName() {
+void
+functionName() {
     while (condition) {
         if (condition) {
             /* Code */

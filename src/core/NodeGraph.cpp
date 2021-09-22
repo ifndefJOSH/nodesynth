@@ -1,4 +1,5 @@
 #include "NodeGraph.h"
+#include <functional>
 
 using namespace nodesynth;
 
@@ -10,24 +11,29 @@ NodeGraph::~NodeGraph() {
 }
 std::shared_ptr<Node>
 NodeGraph::getNodeByName(std::string name) {
-
+	return graphMap.at(name);
 }
+
 void
 NodeGraph::insertNode(std::shared_ptr<Node> node){
-
+	std::string name = node->getName();
 }
+
 void
 NodeGraph::clearGraph(){
 
 }
+
 std::vector<std::shared_ptr<Node>>
 NodeGraph::clearWithoutDeleting(){
-
+	std::vector<std::shared_ptr<Node>> undeletedNodes;
+	// TODO: Add all nodes in map to this and remove keys from map
+	return undeletedNodes;
 }
 void
 NodeGraph::createWorkerThread(){
 	// Bind worker thread to function
-	std::function<void(void)> workerProcess = std::bind(&NodeGraph::updateAllBuffers, &this);
+	std::function<void(void)> workerProcess = std::bind(&NodeGraph::updateAllBuffers, this);
 // 	workerThread = std::allocate_shared
 }
 void

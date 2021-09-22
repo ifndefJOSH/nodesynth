@@ -11,7 +11,10 @@
  **/
 		
 
-#include <Filter.h>
+#ifndef IIRFILTER_H_INCLUDED
+#define IIRFILTER_H_INCLUDED
+
+#include "Filter.h"
 
 namespace nodesynth {
 	 class IIRFilter {
@@ -21,3 +24,4 @@ namespace nodesynth {
 	private:
 	};
 } // namespace nodesynth
+#endif // IIRFILTER_H_INCLUDED

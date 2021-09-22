@@ -11,7 +11,10 @@
  **/
 		
 
-#include <Filter.h>
+#ifndef FLANGERFILTER_H_INCLUDED
+#define FLANGERFILTER_H_INCLUDED
+
+#include "Filter.h"
 
 namespace nodesynth {
 	 class FlangerFilter {
@@ -21,3 +24,4 @@ namespace nodesynth {
 	private:
 	};
 } // namespace nodesynth
+#endif // FLANGERFILTER_H_INCLUDED

@@ -4,6 +4,8 @@
 #include <chrono>	// For elapsed time
 #include <cstdint>	// For sampling rate and buffer size
 
+#define NODESYNTH_JACK_COMPILE
+
 namespace nodesynth {
 	class Options {
 	public:
@@ -18,11 +20,14 @@ namespace nodesynth {
 		static uint64_t getSampleRate();
 		static uint64_t getBufferSize();
 		static uint8_t getMidiChannelCount();
+		static bool getVerbose();
+		static bool setVerbose(bool vb);
 	private:
 		static std::chrono::high_resolution_clock::time_point startTime;
 		static uint64_t sampleRate;
 		static uint64_t buffferSize;
 		static uint8_t midiChannelCount;
+		static bool verbose;
 		static bool initialized; // Only allow initialized once
 	};
 } // namespace nodesynth

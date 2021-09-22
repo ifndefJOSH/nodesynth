@@ -16,6 +16,7 @@
 #include "DataStream.h"
 
 namespace nodesynth {
+	template <typename t>
 	class PrimitiveDataStream {
 	public:
 		PrimitiveDataStream();

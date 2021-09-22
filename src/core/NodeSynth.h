@@ -2,6 +2,10 @@
 #define NODESYNTH_H_INCLUDED
 
 #include "Options.h"
+#include "PresetParser.h"
+#include "NodeGraph.h"
+
+#include <string>
 
 #ifdef NODESYNTH_JACK_COMPILE
 // Include headers necessary for JACK compilation
@@ -24,9 +28,14 @@ namespace nodesynth {
 	public:
 		NodeSynth();
 		~NodeSynth();
+		void startWorkerThread();
+		void readPresetFile(std::string file);
+		void writePresetFile(std::string file);
 	protected:
 
 	private:
+		PresetParser * parser;
+		NodeGraph * graph;
 	};
 } // nodesynth
 

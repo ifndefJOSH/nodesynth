@@ -1,4 +1,6 @@
 #include "NodeGraph.h"
+#include "cli/messages.h"
+
 #include <functional>
 
 using namespace nodesynth;
@@ -6,9 +8,11 @@ using namespace nodesynth;
 NodeGraph::NodeGraph() {
 
 }
+
 NodeGraph::~NodeGraph() {
 
 }
+
 std::shared_ptr<Node>
 NodeGraph::getNodeByName(std::string name) {
 	return graphMap.at(name);

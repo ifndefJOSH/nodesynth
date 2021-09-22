@@ -13,6 +13,10 @@
 #define NODEGRAPH_H_INCLUDED
 
 #include "../node/Node.h"
+#include "../datastream/MidiStream.h"
+#include "../datastream/AudioDataStream.h"
+#include "../datastream/TimeDomainAudioStream.h"
+
 #include "PresetParser.cpp"
 
 #include <map>		// Used for graphMap
@@ -26,17 +30,53 @@ namespace nodesynth {
 		public:
 			NodeGraph();
 			~NodeGraph();
+			/**
+			 * Gets a pointer to a node, given the node's name. Returns null if
+			 * node with that name does not exist.
+			 *
+			 * @param name Name of the node to get.
+			 * @return Pointer to node with that name or nullptr if not.
+			 * */
 			std::shared_ptr<Node> getNodeByName(std::string name);
+			/**
+			 * Inserts a node into the node graph
+			 *
+			 * @param node The node to insert
+			 * */
 			void insertNode(std::shared_ptr<Node> node);
+			/**
+			 * Clears all nodes in the graph
+			 * */
 			void clearGraph();
+			/**
+			 * Clears all nodes in the graph without deleting them.
+			 *
+			 * @return a linked list (in no particular order) of all nodes in the graph
+			 * */
 			std::vector<std::shared_ptr<Node>> clearWithoutDeleting();
+			/**
+			 * Creates the worker thread.
+			 * */
 			void createWorkerThread();
+			/**
+			 * Destroys the worker thread
+			 * */
 			void destroyWorkerThread();
+			// Data streams
+			MidiStream eventsIn;
+			AudioDataStream audioOutLeft;
+			AudioDataStream audioOutRight;
 		protected:
+			/**
+			 * Updates all buffers in the node graph
+			 * */
 			void updateAllBuffers();
 		private:
 			std::map<std::string, std::shared_ptr<Node>> graphMap;
 			std::shared_ptr<std::thread> workerThread;
+			// Output data streams
+			TimeDomainAudioStream audioOutLeftTime;
+			TimeDomainAudioStream audioOutRightTime;
 	};
 }
 

@@ -11,11 +11,33 @@
 #ifndef PRESET_PARSER_H_INCLUDED
 #define PRESET_PARSER_H_INCLUDED
 
+#include "NodeGraph.h"
+#include <memory>
+
+
 namespace nodesynth {
+
 	class PresetParser{
 	public:
+		PresetParser(NodeGraph * graph);
+		~PresetParser();
+		/**
+		 * Parses the file at `filename` and adds it into the parent node graph
+		 *
+		 * @param filename The file to parse
+		 * */
+		void parse(std::string filename);
+		/**
+		 * "Deparses" (aka writes from existing state) from the existing node graph
+		 *
+		 * @param filename The file to write to
+		 * */
+		void deparse(std::string filename);
 	protected:
+		void parseNode();
+		void deparseNode();
 	private:
+		const NodeGraph * graph;
 	};
 }
 

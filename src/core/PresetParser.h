@@ -8,6 +8,8 @@
  * which aims to create a declarative Prolog-like language for musical synthesis. Eventually, I
  * also plan to create a GUI, similar to those in Blender, Natron, or Carla.
 **/
+#ifndef PRESET_PARSER_H_INCLUDED
+#define PRESET_PARSER_H_INCLUDED
 
 namespace nodesynth {
 	class PresetParser{
@@ -16,3 +18,5 @@ namespace nodesynth {
 	private:
 	};
 }
+
+#endif // PRESET_PARSER_H_INCLUDED

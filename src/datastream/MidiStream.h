@@ -17,9 +17,10 @@
 #include "DataStream.h"
 
 namespace nodesynth {
-	 class MidiStream {
+	 class MidiStream : DataStream {
 	public:
-		MidiStream();
+		MidiStream(const std::string name);
+		virtual void updateNext();
 	protected:
 	private:
 	};

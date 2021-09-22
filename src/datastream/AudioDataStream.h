@@ -17,9 +17,10 @@
 #include "DataStream.h"
 
 namespace nodesynth {
-	class AudioDataStream {
+	class AudioDataStream : DataStream{
 	public:
-		AudioDataStream();
+		AudioDataStream(const std::string name);
+		virtual void updateNext();
 	protected:
 	private:
 	};

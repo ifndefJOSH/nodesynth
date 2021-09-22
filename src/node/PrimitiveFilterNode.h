@@ -14,10 +14,10 @@
 #ifndef PRIMITIVEFILTERNODE_H_INCLUDED
 #define PRIMITIVEFILTERNODE_H_INCLUDED
 
-#include "Node.h"
+#include "FilterNode.h"
 
 namespace nodesynth {
-	 class PrimitiveFilterNode : Node {
+	 class PrimitiveFilterNode : FilterNode {
 	public:
 		PrimitiveFilterNode();
 	protected:

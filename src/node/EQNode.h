@@ -14,12 +14,12 @@
 #ifndef EQNODE_H_INCLUDED
 #define EQNODE_H_INCLUDED
 
-#include "Node.h"
+#include "FilterNode.h"
 
 namespace nodesynth {
-	 class EQNode : Node {
+	 class EQNode : FilterNode {
 	public:
-		EQNode();
+		EQNode(const std::string name);
 	protected:
 	private:
 	};

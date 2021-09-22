@@ -14,10 +14,10 @@
 #ifndef PRIMITIVEOSCILLATORNODE_H_INCLUDED
 #define PRIMITIVEOSCILLATORNODE_H_INCLUDED
 
-#include "Node.h"
+#include "OscillatorNode.h"
 
 namespace nodesynth {
-	 class PrimitiveOscillatorNode : Node {
+	 class PrimitiveOscillatorNode : OscillatorNode {
 	public:
 		PrimitiveOscillatorNode();
 	protected:

@@ -19,7 +19,7 @@
 namespace nodesynth {
 	 class EnvelopeNode : Node {
 	public:
-		EnvelopeNode();
+		EnvelopeNode(const std::string name);
 	protected:
 	private:
 	};

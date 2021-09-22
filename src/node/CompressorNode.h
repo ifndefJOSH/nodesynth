@@ -19,7 +19,7 @@
 namespace nodesynth {
 	 class CompressorNode : Node {
 	public:
-		CompressorNode();
+		CompressorNode(const std::string name);
 	protected:
 	private:
 	};

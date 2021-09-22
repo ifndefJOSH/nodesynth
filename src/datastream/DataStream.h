@@ -32,11 +32,13 @@ namespace nodesynth {
 		, PRIMITIVE_UNSIGNED_INTEGER
 		, PRIMITIVE_FLOAT
 		, PRIMITIVE_BOOLEAN
+		// Base case so g++ doesn't yell at me
+		, UNDEFINED_TYPE
 	};
 
 	class DataStream {
 	public:
-		DataStream(const std::string name);
+		DataStream(const std::string name, streamtype type);
 		void connect(const DataStream & ds);
 		const streamtype getStreamType();
 		virtual void updateNext() = 0;

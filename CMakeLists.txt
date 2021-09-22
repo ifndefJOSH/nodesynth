@@ -9,6 +9,8 @@ find_package(FFTW3 ${FFTW_MIN_VERSION} REQUIRED)
 
 set(SOURCE_FILES
 	src/main.cpp
+	src/Arguments.c
+	src/Arguments.h
 	src/core/NodeGraph.cpp
 	src/core/NodeGraph.h
 	src/core/NodeSynth.cpp

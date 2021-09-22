@@ -14,10 +14,10 @@
 #ifndef FORMANTNODE_H_INCLUDED
 #define FORMANTNODE_H_INCLUDED
 
-#include "Node.h"
+#include "FilterNode.h"
 
 namespace nodesynth {
-	 class FormantNode : Node {
+	 class FormantNode : FilterNode {
 	public:
 		FormantNode();
 	protected:

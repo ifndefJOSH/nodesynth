@@ -14,12 +14,12 @@
 #ifndef AMMODULATORNODE_H_INCLUDED
 #define AMMODULATORNODE_H_INCLUDED
 
-#include "Node.h"
+#include "ModulatorNode.h"
 
 namespace nodesynth {
-	 class AMModulatorNode : Node {
+	 class AMModulatorNode : ModulatorNode {
 	public:
-		AMModulatorNode();
+		AMModulatorNode(const std::string name);
 	protected:
 	private:
 	};

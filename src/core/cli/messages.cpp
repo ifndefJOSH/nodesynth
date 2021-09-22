@@ -15,6 +15,10 @@ std::ostream& operator<<(std::ostream& os, const LogFile& logFile) {
 
 void
 good(std::string msg){
+	// Return if we want to be silent
+	if (Options::getSilent()) {
+		return;
+	}
 	std::cerr << BOLD(FGRN("[MESSAGE (GOOD)]:"));
 	std::cerr << '(' << BOLD("Elapsed Time:") << Options::getElapsedTime().count() << " s)" << std::endl;
 	std::cerr << '\t' << msg << std::endl;
@@ -22,6 +26,10 @@ good(std::string msg){
 
 void
 neutral(std::string msg){
+	// Return if we want to be silent
+	if (Options::getSilent()) {
+		return;
+	}
 	std::cerr << BOLD(FMAG("[MESSAGE (NEUTRAL)]:"));
 	std::cerr << '(' << BOLD("Elapsed Time:") << Options::getElapsedTime().count() << " s)" << std::endl;
 	std::cerr << '\t' << msg << std::endl;
@@ -36,6 +44,10 @@ info(std::string msg){
 
 void
 warning(std::string msg){
+	// Return if we want to be silent
+	if (Options::getSilent()) {
+		return;
+	}
 	std::cerr << BOLD(FYEL("[WARNING]:"));
 	std::cerr << '(' << BOLD("Elapsed Time:") << Options::getElapsedTime().count() << " s)" << std::endl;
 	std::cerr << '\t' << msg << std::endl;
@@ -43,6 +55,10 @@ warning(std::string msg){
 
 void
 error(std::string msg){
+	// Return if we want to be silent
+	if (Options::getSilent()) {
+		return;
+	}
 	std::cerr << BOLD(FRED("[ERROR]:"));
 	std::cerr << '(' << BOLD("Elapsed Time:") << Options::getElapsedTime().count() << " s)" << std::endl;
 	std::cerr << '\t' << msg << std::endl;
@@ -51,6 +67,8 @@ error(std::string msg){
 void
 errorExit(std::string msg, uint8_t exitCode){
 	error(msg);
-	std::cerr << "This error appears to be unrecoverable. Exiting with code " << exitCode << std::endl;
+	if (!Options::getSilent()) {
+		std::cerr << "This error appears to be unrecoverable. Exiting with code " << exitCode << std::endl;
+	}
 	std::exit(exitCode);
 }

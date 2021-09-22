@@ -17,9 +17,10 @@
 
 namespace nodesynth {
 	template <typename t>
-	class PrimitiveDataStream {
+	class PrimitiveDataStream : DataStream {
 	public:
-		PrimitiveDataStream();
+		PrimitiveDataStream(const std::string name);
+		virtual void updateNext();
 	protected:
 	private:
 	};

@@ -14,10 +14,10 @@
 #ifndef WAVETABLEOSCILLATORNODE_H_INCLUDED
 #define WAVETABLEOSCILLATORNODE_H_INCLUDED
 
-#include "Node.h"
+#include "OscillatorNode.h"
 
 namespace nodesynth {
-	 class WavetableOscillatorNode : Node {
+	 class WavetableOscillatorNode : OscillatorNode {
 	public:
 		WavetableOscillatorNode();
 	protected:

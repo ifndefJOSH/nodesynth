@@ -19,7 +19,7 @@
 namespace nodesynth {
 	 class ChorusNode : Node {
 	public:
-		ChorusNode();
+		ChorusNode(const std::string name);
 	protected:
 	private:
 	};

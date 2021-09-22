@@ -14,10 +14,10 @@
 #ifndef SAMPLERNODE_H_INCLUDED
 #define SAMPLERNODE_H_INCLUDED
 
-#include "Node.h"
+#include "OscillatorNode.h"
 
 namespace nodesynth {
-	 class SamplerNode : Node {
+	 class SamplerNode : OscillatorNode {
 	public:
 		SamplerNode();
 	protected:

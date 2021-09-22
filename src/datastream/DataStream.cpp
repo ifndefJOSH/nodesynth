@@ -2,8 +2,9 @@
 
 using namespace nodesynth;
 
-DataStream::DataStream(const std::string name)
-	: name(name)
+DataStream::DataStream(const std::string name, streamtype type)
+	: type(type)
+	, name(name)
 {
 	// Intentionally left empty
 }

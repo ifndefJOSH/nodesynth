@@ -14,10 +14,10 @@
 #ifndef FMMODULATORNODE_H_INCLUDED
 #define FMMODULATORNODE_H_INCLUDED
 
-#include "Node.h"
+#include "ModulatorNode.h"
 
 namespace nodesynth {
-	 class FMModulatorNode : Node {
+	 class FMModulatorNode : ModulatorNode {
 	public:
 		FMModulatorNode();
 	protected:

@@ -16,9 +16,10 @@
 #include "DataStream.h"
 
 namespace nodesynth {
-	class TimeDomainAudioStream {
+	class TimeDomainAudioStream : DataStream {
 	public:
-		TimeDomainAudioStream();
+		TimeDomainAudioStream(const std::string name);
+		virtual void updateNext();
 	protected:
 	private:
 	};

@@ -22,12 +22,15 @@ namespace nodesynth {
 		static uint8_t getMidiChannelCount();
 		static bool getVerbose();
 		static bool setVerbose(bool vb);
+		static bool getSilent();
+		static bool setSilent(bool sl);
 	private:
 		static std::chrono::high_resolution_clock::time_point startTime;
 		static uint64_t sampleRate;
 		static uint64_t buffferSize;
 		static uint8_t midiChannelCount;
 		static bool verbose;
+		static bool silent; // Silent takes priority over verbose
 		static bool initialized; // Only allow initialized once
 	};
 } // namespace nodesynth

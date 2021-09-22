@@ -15,8 +15,11 @@ set(SOURCE_FILES
 	src/core/NodeSynth.h
 	src/core/PresetParser.cpp
 	src/core/PresetParser.h
+	src/core/Options.cpp
+	src/core/Options.h
 	src/core/cli/messages.cpp
 	src/core/cli/messages.h
+	src/core/cli/ANSIColors.h
 )
 
 set(NODE_FILES

@@ -39,6 +39,10 @@
 
 **Memory is exposed** between streams, so as much as OOP abstraction is *nice*, we're not doing it 100%
 
+## Decided questions
+
+- Datastreams are stored in nodes in a `std::map` by name. This allows, in the eventual declarative language, to have us connect nodes by port name. This is in stark contrast to my previous method (see my *messy* commit history) where it was a bunch of `void**` pointers to buffers of different types. Now, we use `std::shared_ptr<DataStream>` for memory management.
+
 ## Undecided questions
 
 - Since MIDI channels are going to be separate buffers, (`N` buffers for `N` input nodes), should there be an auto-cast to single-channel audio? Or should there be a "channel compress" node that takes MIDI-separated audio and compresses it to monaural audio?

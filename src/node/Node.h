@@ -14,12 +14,22 @@
 #ifndef NODE_H_INCLUDED
 #define NODE_H_INCLUDED
 
+#include <map>
+#include <string>
+#include <memory>
+
+#include "../datastream/DataStream.h"
+
 namespace nodesynth {
 	class Node {
 	public:
 		Node();
+		~Node();
+		virtual void initializePorts() = 0;
 	protected:
+		void addDataStreamToPorts(std::shared_ptr<DataStream> ds);
 	private:
+		std::map<std::string, std::shared_ptr<DataStream>> ports;
 	};
 } // namespace nodesynth
 

@@ -43,7 +43,7 @@
 
 - Datastreams are stored in nodes in a `std::map` by name. This allows, in the eventual declarative language, to have us connect nodes by port name. This is in stark contrast to my previous method (see my *messy* commit history) where it was a bunch of `void**` pointers to buffers of different types. Now, we use `std::shared_ptr<DataStream>` for memory management.
 
-- Filters only update *once* per audio buffer change
+- Filters/Amplifiers/any parameter that isn't audio/etc. only update *once* per audio buffer change
 
 ## Undecided questions
 

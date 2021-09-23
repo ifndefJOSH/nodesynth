@@ -2,7 +2,7 @@
 
 ## Prototyping classes and functions
 
-In the header file (`.h` and *not* `.hpp` or `.hh`), all STAMINA related objects should be within `namespace nodesynth`. Within the `.cpp` files, rather than adding `namespace nodesynth { /* code */ }`, at the beginning of the file, we should add the line `using namespace nodesynth;`.
+In the header file (`.h` and *not* `.hpp` or `.hh`), all nodesynth related objects should be within `namespace nodesynth`. Within the `.cpp` files, rather than adding `namespace nodesynth { /* code */ }`, at the beginning of the file, we should add the line `using namespace nodesynth;`.
 
 ### Function prototypes should look as follows:
 Either (A)

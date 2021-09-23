@@ -5,7 +5,13 @@
 
 using namespace nodesynth;
 
-NodeGraph::NodeGraph() {
+NodeGraph::NodeGraph()
+	: eventsIn("EventsIn")
+	, audioOutLeft("AudioOutLeft")
+	, audioOutRight("AudioOutRight")
+	, audioOutLeftTime("AudioOutLeftTime")
+	, audioOutRightTime("AudioOutRightTime")
+{
 
 }
 

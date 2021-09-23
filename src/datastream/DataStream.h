@@ -38,7 +38,7 @@ namespace nodesynth {
 
 	class DataStream {
 	public:
-		DataStream(const std::string name, streamtype type);
+		DataStream(const std::string name, streamtype type = UNDEFINED_TYPE);
 		void connect(const DataStream & ds);
 		const streamtype getStreamType();
 		virtual void updateNext() = 0;

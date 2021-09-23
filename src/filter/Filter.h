@@ -14,12 +14,16 @@
 #define FILTER_H_INCLUDED
 
 #include "../core/Options.h"
+#include "../datastream/AudioDataStream.h"
 		
 
 namespace nodesynth {
 	class Filter {
 	public:
 		Filter();
+		~Filter();
+		virtual void createFilter() = 0;
+		void applyFilter(AudioDataStream & source, AudioDataStream & dest);
 	protected:
 	private:
 	};

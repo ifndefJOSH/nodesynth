@@ -43,6 +43,23 @@
 
 - Datastreams are stored in nodes in a `std::map` by name. This allows, in the eventual declarative language, to have us connect nodes by port name. This is in stark contrast to my previous method (see my *messy* commit history) where it was a bunch of `void**` pointers to buffers of different types. Now, we use `std::shared_ptr<DataStream>` for memory management.
 
+- Filters only update *once* per audio buffer change
+
 ## Undecided questions
 
 - Since MIDI channels are going to be separate buffers, (`N` buffers for `N` input nodes), should there be an auto-cast to single-channel audio? Or should there be a "channel compress" node that takes MIDI-separated audio and compresses it to monaural audio?
+
+- How should we deal with MIDI?
+	+ First frame is a MIDI note, and second frame is velocity, with subsequent frames being duration the MIDI note has lasted, with `0` being no note?
+		- **Advantages**:
+			+ Makes the amplitude envelope (or envelope node in general) super easy to do.
+			+ Oscillator node would only have to get the MIDI note from the first nonzero frame, and ignore all subsequent frames until a zero was detected (note off)
+		- **Disadvantages**:
+			+ Unnecessary holding of memory?
+	+ Holds only current MIDI note and start time (MIDI note includes velocity)
+		- **Advantages**:
+			+ Less use of memory
+			+ Quicker update times, less memory copying.
+			+ More intuitive routing to filters.
+		- **Disadvantages**:
+			+ More calculations in amplitude envelope, but since the envelope only updates once per buffer change, we should be fine.

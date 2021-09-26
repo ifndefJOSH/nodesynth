@@ -16,6 +16,8 @@
 
 #include <string>
 
+#include "../core/Options.h"
+
 namespace nodesynth {
 
 	enum streamtype {
@@ -46,6 +48,18 @@ namespace nodesynth {
 		const streamtype type;
 	private:
 		const std::string name;
+	};
+
+	template <typename DataStreamType>
+	class DataStreamReader {
+	public:
+		DataStreamReader();
+		~DataStreamReader();
+		bool isConnected();
+		void connect(DataStreamType * dataStream);
+		void disconnect();
+	private:
+		DataStreamType * dataStream;
 	};
 } // namespace nodesynth
 #endif // DATASTREAM_H_INCLUDED

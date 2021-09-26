@@ -33,6 +33,7 @@
 	- `TimeDomainAudioStream`: Audio in the time domain
 	- `MidiStream`: Stream for MIDI notes
 	- `PrimitiveDataStream<Type>`: (templated) stream for primitive types
+	3. 05. `DataStreamReader<Type=DataStream>`: Reads data stream. Used for input into nodes.
 4. `NodeGraph`: Hashmap of all nodes by name.
 5. `NodeSynth`: Main class instantiated.
 6. `PresetParser`: Parses the preset file and adds nodes to graph

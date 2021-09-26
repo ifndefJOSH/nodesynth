@@ -16,13 +16,17 @@
 #include "DataStream.h"
 
 namespace nodesynth {
-	template <typename t>
+	template <typename T>
 	class PrimitiveDataStream : DataStream {
 	public:
 		PrimitiveDataStream(const std::string name);
 		virtual void updateNext();
+		bool wasUpdated();
+		T getValueThisCycle();
+		void setValueThisCycle(T value);
 	protected:
 	private:
+		T valueThisCycle;
 	};
 } // namespace nodesynth
 

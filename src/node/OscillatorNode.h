@@ -20,6 +20,7 @@ namespace nodesynth {
 	 class OscillatorNode : Node {
 	public:
 		OscillatorNode();
+		double frequencyFromMidiNote(uint8_t midiNote);
 	protected:
 	private:
 	};

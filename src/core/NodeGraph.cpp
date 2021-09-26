@@ -40,6 +40,17 @@ NodeGraph::clearWithoutDeleting(){
 	// TODO: Add all nodes in map to this and remove keys from map
 	return undeletedNodes;
 }
+
+bool
+NodeGraph::connectPorts(
+	std::string fromNodeId
+	, std::string fromNodePortId
+	, std::string toNodeId
+	, std::string toNodePortId
+) {
+	std::shared_ptr<Node> fromNode = getNodeByName(fromNodeId);
+	std::shared_ptr<Node> toNode = getNodeByName(toNodeId);
+}
 void
 NodeGraph::createWorkerThread(){
 	// Bind worker thread to function

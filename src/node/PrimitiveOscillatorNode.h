@@ -21,6 +21,10 @@ namespace nodesynth {
 	public:
 		PrimitiveOscillatorNode();
 	protected:
+		void createSawToothWave(double frequency);
+		void createSquareWave(double frequency);
+		void createSineWave(double frequency);
+		void createTriangleWave(double frequency);
 	private:
 	};
 } // namespace nodesynth

@@ -55,6 +55,20 @@ namespace nodesynth {
 			 * */
 			std::vector<std::shared_ptr<Node>> clearWithoutDeleting();
 			/**
+			 * Connects ports from two nodes in the graph.
+			 *
+			 * @param fromNodeId Id of the "from" node
+			 * @param fromNodePortId The Id of the output port within the from node to connect
+			 * @param toNodeId Id of the "to" node
+			 * @param toNodePortId The id of the input port within the node to connect to
+			 * */
+			bool connectPorts(
+				std::string fromNodeId
+				, std::string fromNodePortId
+				, std::string toNodeId
+				, std::string toNodePortId
+			);
+			/**
 			 * Creates the worker thread.
 			 * */
 			void createWorkerThread();

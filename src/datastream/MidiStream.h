@@ -17,12 +17,20 @@
 #include "DataStream.h"
 
 namespace nodesynth {
-	 class MidiStream : DataStream {
+	struct MidiNote {
+		uint8_t note;
+		double time; // Time since we have turned on
+		double duration;
+		bool on;
+	}
+	class MidiStream : DataStream {
 	public:
 		MidiStream(const std::string name);
 		virtual void updateNext();
+		MidiNote * notes;
 	protected:
 	private:
+		uint64_t numMidiChannels;
 	};
 } // namespace nodesynth
 #endif // MIDISTREAM_H_INCLUDED

@@ -23,6 +23,15 @@ namespace nodesynth {
 		virtual void updateNext();
 	protected:
 	private:
+		ChanneledAudioDataStreamReader next;
+	};
+	class ChanneledAudioDataStreamReader : DataStreamReader<ChanneledAudioDataStream> {
+	public:
+		ChanneledAudioDataStreamReader();
+		virtual void connect(ChanneledAudioDataStream * dataStream);
+	protected:
+
+	private:
 	};
 } // namespace nodesynth
 

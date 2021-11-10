@@ -21,7 +21,16 @@ namespace nodesynth {
 	public:
 		AudioDataStream(const std::string name);
 		virtual void updateNext();
+		virtual void exposeToReader();
 	protected:
+	private:
+	};
+	class AudioDataStreamReader : DataStreamReader<AudioDataStream> {
+	public:
+		AudioDataStreamReader();
+		virtual void connect(AudioDataStream * dataStream);
+	protected:
+
 	private:
 	};
 } // namespace nodesynth

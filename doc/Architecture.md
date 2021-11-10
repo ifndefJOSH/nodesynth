@@ -34,6 +34,7 @@
 	- `MidiStream`: Stream for MIDI notes
 	- `PrimitiveDataStream<Type>`: (templated) stream for primitive types
 	3. 05. `DataStreamReader<Type=DataStream>`: Reads data stream. Used for input into nodes.
+		- I think how it's going to work is that `DataStreamReader`s will request direct access to the datastream's buffers, and will be hosted by a node.
 4. `NodeGraph`: Hashmap of all nodes by name.
 5. `NodeSynth`: Main class instantiated.
 6. `PresetParser`: Parses the preset file and adds nodes to graph

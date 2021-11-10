@@ -28,6 +28,15 @@ namespace nodesynth {
 	private:
 		T valueThisCycle;
 	};
+	template <typename T>
+	class PrimitiveDataStreamReader : DataStreamReader<PrimitiveDataStream<T>> {
+	public:
+		PrimitiveDataStreamReader();
+		virtual void connect(PrimitiveDataStreamReader * dataStream);
+	protected:
+
+	private:
+	};
 } // namespace nodesynth
 
 

@@ -23,6 +23,14 @@ namespace nodesynth {
 	protected:
 	private:
 	};
+	class TimeDomainAudioStreamReader : DataStreamReader<TimeDomainAudioStream> {
+	public:
+		TimeDomainAudioStreamReader();
+		virtual void connect(TimeDomainAudioStream * dataStream);
+	protected:
+
+	private:
+	};
 } // namespace nodesynth
 
 #endif // TIME_DOMAIN_AUDIO_STREAM_H_INCLUDED

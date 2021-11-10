@@ -44,6 +44,7 @@ namespace nodesynth {
 		void connect(const DataStream & ds);
 		const streamtype getStreamType();
 		virtual void updateNext() = 0;
+		virtual void exposeToReader() = 0;
 	protected:
 		const streamtype type;
 	private:
@@ -56,9 +57,9 @@ namespace nodesynth {
 		DataStreamReader();
 		~DataStreamReader();
 		bool isConnected();
-		void connect(DataStreamType * dataStream);
+		virtual void connect(DataStreamType * dataStream) = 0;
 		void disconnect();
-	private:
+	protected:
 		DataStreamType * dataStream;
 	};
 } // namespace nodesynth

@@ -25,13 +25,5 @@ namespace nodesynth {
 	protected:
 	private:
 	};
-	class AudioDataStreamReader : DataStreamReader<AudioDataStream> {
-	public:
-		AudioDataStreamReader();
-		virtual void connect(AudioDataStream * dataStream);
-	protected:
-
-	private:
-	};
 } // namespace nodesynth
 #endif // AUDIODATASTREAM_H_INCLUDED

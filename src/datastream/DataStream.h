@@ -47,20 +47,9 @@ namespace nodesynth {
 		virtual void exposeToReader() = 0;
 	protected:
 		const streamtype type;
+		DataStream & next;
 	private:
 		const std::string name;
-	};
-
-	template <typename DataStreamType>
-	class DataStreamReader {
-	public:
-		DataStreamReader();
-		~DataStreamReader();
-		bool isConnected();
-		virtual void connect(DataStreamType * dataStream) = 0;
-		void disconnect();
-	protected:
-		DataStreamType * dataStream;
 	};
 } // namespace nodesynth
 #endif // DATASTREAM_H_INCLUDED

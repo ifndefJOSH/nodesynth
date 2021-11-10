@@ -8,3 +8,13 @@ DataStream::DataStream(const std::string name, streamtype type)
 {
 	// Intentionally left empty
 }
+
+void
+DataStream::connect(const DataStream & ds) {
+	if (ds.type == type) {
+		next = ds;
+	}
+	else {
+		// TODO: raise error
+	}
+}

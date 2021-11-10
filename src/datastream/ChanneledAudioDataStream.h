@@ -20,18 +20,14 @@ namespace nodesynth {
 	 class ChanneledAudioDataStream : DataStream {
 	public:
 		ChanneledAudioDataStream(const std::string name);
+		~ChanneledAudioDataStream();
 		virtual void updateNext();
+		double ** channeledAudio;
 	protected:
 	private:
-		ChanneledAudioDataStreamReader next;
-	};
-	class ChanneledAudioDataStreamReader : DataStreamReader<ChanneledAudioDataStream> {
-	public:
-		ChanneledAudioDataStreamReader();
-		virtual void connect(ChanneledAudioDataStream * dataStream);
-	protected:
-
-	private:
+		uint8_t numMidiChannels;
+		uint64_t bufSize;
+		size_t copySize;
 	};
 } // namespace nodesynth
 

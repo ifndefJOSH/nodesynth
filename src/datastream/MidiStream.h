@@ -24,13 +24,5 @@ namespace nodesynth {
 	protected:
 	private:
 	};
-	class MidiStreamStreamReader : DataStreamReader<MidiStream> {
-	public:
-		MidiStreamStreamReader();
-		virtual void connect(MidiStream * dataStream);
-	protected:
-
-	private:
-	};
 } // namespace nodesynth
 #endif // MIDISTREAM_H_INCLUDED

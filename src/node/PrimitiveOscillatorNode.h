@@ -9,7 +9,7 @@
  * which aims to create a declarative Prolog-like language for musical synthesis. Eventually, I
  * also plan to create a GUI, similar to those in Blender, Natron, or Carla.
  **/
-		
+
 
 #ifndef PRIMITIVEOSCILLATORNODE_H_INCLUDED
 #define PRIMITIVEOSCILLATORNODE_H_INCLUDED
@@ -21,11 +21,28 @@ namespace nodesynth {
 	public:
 		PrimitiveOscillatorNode();
 	protected:
-		void createSawToothWave(double frequency);
-		void createSquareWave(double frequency);
-		void createSineWave(double frequency);
-		void createTriangleWave(double frequency);
+		void createSawToothWave(
+			double frequency
+			, double velocity
+			, uint8_t channel
+		);
+		void createSquareWave(
+			double frequency
+			, double velocity
+			, uint8_t channel
+		);
+		void createSineWave(
+			double frequency
+			, double velocity
+			, uint8_t channel
+		);
+		void createTriangleWave(
+			double frequency
+			, double velocity
+			, uint8_t channel
+		);
 	private:
+
 	};
 } // namespace nodesynth
 #endif // PRIMITIVEOSCILLATORNODE_H_INCLUDED

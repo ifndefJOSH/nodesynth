@@ -16,12 +16,19 @@
 
 #include "Node.h"
 
+#include "../datastream/MidiStream.h"
+#include "../datastream/ChanneledAudioDataStream.h"
+
 namespace nodesynth {
-	 class OscillatorNode : Node {
+	class OscillatorNode : Node {
 	public:
 		OscillatorNode();
 		double frequencyFromMidiNote(uint8_t midiNote);
+		virtual void connect(DataStream * ds, uint8_t port);
+		virtual void disconnect(uint8_t port);
+		ChanneledAudioDataStream out;
 	protected:
+		MidiStream * notesIn;
 	private:
 	};
 } // namespace nodesynth

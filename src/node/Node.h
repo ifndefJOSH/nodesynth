@@ -29,6 +29,19 @@ namespace nodesynth {
 		virtual void initializePorts() = 0;
 		virtual void update() = 0;
 		const std::string getName();
+		/**
+		 * Connects a Node's output to our certain Node's input at port number port
+		 *
+		 * @param ds The datastream to connect to
+		 * @param port The port to connect it to
+		 * */
+		virtual void connect(DataStream * ds, uint8_t port) = 0;
+		/**
+		 * Disconnects a port
+		 *
+		 * @param port The port to disconnect
+		 * */
+		virtual void disconnect(uint8_t port) = 0;
 	protected:
 		void addDataStreamToPorts(std::shared_ptr<DataStream> ds);
 	private:

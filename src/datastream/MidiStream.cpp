@@ -12,3 +12,20 @@ MidiStream::MidiStream(const std::string name) :
 MidiStream::~MidiStream() {
 	delete notes;
 }
+
+void
+MidiStream::updateNext() {
+	memcpy(next.notes, notes, sizeof(MidiNote) * numMidiChannels);
+}
+
+void
+MidiStream::update() {
+	for (uint8_t i = 0; i < numMidiChannels; i++) {
+		if (notes[i].on) {
+			notes[i].time += // TODO: update elapsed time
+			if (notes[i].time >= notes[i].duration) {
+				notes[i].on = false;
+			}
+		}
+	}
+}

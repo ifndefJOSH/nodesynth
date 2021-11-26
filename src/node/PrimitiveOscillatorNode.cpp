@@ -8,6 +8,8 @@ using namespace nodesynth;
 
 PrimitiveOscillatorNode::PrimitiveOscillatorNode() {
 	// temporaryBuffers = new double[
+	// Default type for our waveforms
+	waveformType = WAVEFORMS::SAWTOOTH;
 }
 
 void

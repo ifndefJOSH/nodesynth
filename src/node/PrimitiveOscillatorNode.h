@@ -17,6 +17,13 @@
 #include "OscillatorNode.h"
 
 namespace nodesynth {
+	typedef unsigned char waveform_t;
+	enum WAVEFORMS {
+		SAWTOOTH	= 0
+		, SQUARE	= 1
+		, SINE		= 2
+		, TRIANGLE	= 3
+	};
 	 class PrimitiveOscillatorNode : OscillatorNode {
 	public:
 		PrimitiveOscillatorNode();
@@ -41,8 +48,11 @@ namespace nodesynth {
 			, double velocity
 			, uint8_t channel
 		);
-	private:
 
+		virtual void update();
+	private:
+		waveform_t waveformType;
+		double ** temporaryBuffers;
 	};
 } // namespace nodesynth
 #endif // PRIMITIVEOSCILLATORNODE_H_INCLUDED

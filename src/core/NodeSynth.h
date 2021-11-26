@@ -23,6 +23,10 @@
 // TODO: Add headers for VST3 compile
 #endif
 
+#ifdef NODESYNTH_STANDALONE_COMPILE
+// TODO: Add jeaders for standalone compile
+#endif // NODESYNTH_STANDALONE_COMPILE
+
 namespace nodesynth {
 	class NodeSynth {
 	public:

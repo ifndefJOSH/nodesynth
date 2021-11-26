@@ -9,7 +9,7 @@
  * which aims to create a declarative Prolog-like language for musical synthesis. Eventually, I
  * also plan to create a GUI, similar to those in Blender, Natron, or Carla.
  **/
-		
+
 
 #ifndef OSCILLATORNODE_H_INCLUDED
 #define OSCILLATORNODE_H_INCLUDED
@@ -27,6 +27,8 @@ namespace nodesynth {
 		virtual void connect(DataStream * ds, uint8_t port);
 		virtual void disconnect(uint8_t port);
 		ChanneledAudioDataStream out;
+		// OscillatorNode is still Abstract
+		virtual void update() = 0;
 	protected:
 		MidiStream * notesIn;
 	private:

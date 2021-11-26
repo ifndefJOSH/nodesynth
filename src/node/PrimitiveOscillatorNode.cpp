@@ -6,6 +6,10 @@ using namespace nodesynth;
 
 #include <fftw3.h>
 
+PrimitiveOscillatorNode::PrimitiveOscillatorNode() {
+	// temporaryBuffers = new double[
+}
+
 void
 PrimitiveOscillatorNode::createSawToothWave(
 	double frequency
@@ -36,6 +40,7 @@ PrimitiveOscillatorNode::createSawToothWave(
 	// Free resources
 	delete[] y;
 }
+
 void
 PrimitiveOscillatorNode::createSquareWave(
 	double frequency
@@ -72,6 +77,11 @@ PrimitiveOscillatorNode::createSineWave(
 	, double velocity
 	, uint8_t channel
 ) {
+	/*
+		TODO: Currently gets at specific frequency in a box, but if we sampled, we'd get some
+		skewing/blurring in the frequency domain. So, we SHOULD develop the wave in time domain
+		and then convert into frequency domain using the fft
+	*/
 	// Get the output buffer we are trying to write to
 	double * buffer = out.channeledAudio[channel];
 	double nyquistFrequency = Options::getSampleRate() / 2;
@@ -79,7 +89,7 @@ PrimitiveOscillatorNode::createSineWave(
 		buffer[i] = 0;
 	}
 	int freqIndex = frequency * (Options::getBufferSize() / nyquistFrequency);
-	buffer[freqIndex] = MAX_AMPLITUDE;
+	buffer[freqIndex] = MAX_AMPLITUDE * velocity;
 }
 void
 PrimitiveOscillatorNode::createTriangleWave(
@@ -116,3 +126,42 @@ PrimitiveOscillatorNode::createTriangleWave(
 	delete[] y;
 }
 
+void
+PrimitiveOscillatorNode::update() {
+	// For each MIDI channel in notesIn
+	for (uint8_t i = 0; i < Options::getMidiChannelCount(); i++) {
+		// Read the MIDI note and update the appropriate channel
+		switch (waveformType) {
+			case WAVEFORMS::SAWTOOTH:
+				createSawToothWave(
+					frequencyFromMidiNote(notesIn[i].note)
+					, notesIn[i].velocity
+					, i
+				);
+				break;
+			case WAVEFORMS::SQUARE:
+				createSquareWave(
+					frequencyFromMidiNote(notesIn[i].note)
+					, notesIn[i].velocity
+					, i
+				);
+				break;
+			case WAVEFORMS::SINE:
+				createSineWave(
+					frequencyFromMidiNote(notesIn[i].note)
+					, notesIn[i].velocity
+					, i
+				);
+				break;
+			case WAVEFORMS::TRIANGLE:
+				createTriangleWave(
+					frequencyFromMidiNote(notesIn[i].note)
+					, notesIn[i].velocity
+					, i
+				);
+				break;
+			default:
+			// TODO: handle error
+		}
+	}
+}

@@ -19,11 +19,11 @@
 
 #include "PresetParser.cpp"
 
-#include <map>		// Used for graphMap
-#include <memory>	// Used for std::shared_ptr
-#include <string>	// Used for map keys
-#include <vector>	// Used for clearWithoutDeleting
-#include <thread>	// Used for worker thread
+#include <unordered_map>	// Used for graphMap
+#include <memory>			// Used for std::shared_ptr
+#include <string>			// Used for map keys
+#include <vector>			// Used for clearWithoutDeleting
+#include <thread>			// Used for worker thread
 
 namespace nodesynth {
 	class NodeGraph {
@@ -86,7 +86,7 @@ namespace nodesynth {
 			 * */
 			void updateAllBuffers();
 		private:
-			std::map<std::string, std::shared_ptr<Node>> graphMap;
+			std::unordered_map<std::string, std::shared_ptr<Node>> graphMap;
 			std::shared_ptr<std::thread> workerThread;
 			// Output data streams
 			TimeDomainAudioStream audioOutLeftTime;

@@ -22,7 +22,8 @@ namespace nodesynth {
 		double time; // Time since we have turned on
 		double duration;
 		bool on;
-	}
+		double velocity;
+	};
 	class MidiStream : DataStream {
 	public:
 		MidiStream(const std::string name);

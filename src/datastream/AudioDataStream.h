@@ -9,7 +9,7 @@
  * which aims to create a declarative Prolog-like language for musical synthesis. Eventually, I
  * also plan to create a GUI, similar to those in Blender, Natron, or Carla.
  **/
-		
+
 
 #ifndef AUDIODATASTREAM_H_INCLUDED
 #define AUDIODATASTREAM_H_INCLUDED
@@ -22,8 +22,11 @@ namespace nodesynth {
 		AudioDataStream(const std::string name);
 		virtual void updateNext();
 		virtual void exposeToReader();
+		double * audio;
 	protected:
 	private:
+		uint64_t bufSize;
+		size_t copySize;
 	};
 } // namespace nodesynth
 #endif // AUDIODATASTREAM_H_INCLUDED

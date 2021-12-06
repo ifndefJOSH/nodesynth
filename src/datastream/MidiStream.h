@@ -33,6 +33,7 @@ namespace nodesynth {
 	protected:
 	private:
 		uint64_t numMidiChannels;
+		double timePerBuffer;
 	};
 } // namespace nodesynth
 #endif // MIDISTREAM_H_INCLUDED

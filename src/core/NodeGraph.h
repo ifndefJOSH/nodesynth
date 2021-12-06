@@ -45,6 +45,12 @@ namespace nodesynth {
 			 * */
 			void insertNode(std::shared_ptr<Node> node);
 			/**
+			 * Inserts a node into the node graph and makes it a shared pointer.
+			 *
+			 * @param node The node to insert
+			 * */
+			void insertNode(Node * node);
+			/**
 			 * Clears all nodes in the graph
 			 * */
 			void clearGraph();

@@ -35,8 +35,11 @@ namespace nodesynth {
 		void startWorkerThread();
 		void readPresetFile(std::string file);
 		void writePresetFile(std::string file);
+		void setOptions();
 	protected:
-
+#ifdef NODESYNTH_JACK_COMPILE
+		jack_client_t * client;
+#endif // NODESYNTH_JACK_COMPILE
 	private:
 		PresetParser * parser;
 		NodeGraph * graph;

@@ -2,10 +2,11 @@
 
 #include "../../src/lib/fft.h"
 
-#include <random.h>
+// #include <random.h>
 #include <stdlib.h>
 #include <time.h> // For timing to see how we are going to contribute to latency
 #include <stdio.h>
+#include <complex.h>
 
 #define TEST_ITERATIONS 200
 #define UPPER_BOUND 10
@@ -19,9 +20,9 @@ random_array(int len) {
 	return arr;
 }
 
-complex *
-random_complex_array(int len) {
-	complex * arr = malloc(sizeof(complex) * len);
+cplx *
+random_cplx_array(int len) {
+	cplx * arr = malloc(sizeof(cplx) * len);
 	for (int i = 0; i < len; i++) {
 		arr[i] = CMPLX(
 			rand() / (RAND_MAX / UPPER_BOUND)
@@ -57,7 +58,7 @@ fft_ifft_test() {
 				, (float) (ifft_end - ifft_start) / CLOCKS_PER_SEC
 			);
 			// Assert the equality of the two arrays
-
+			JTest<double>::assert_array_equal(time_domain, size, time_domain_two, size);
 			// Free memory
 			free(freq_domain);
 			free(time_domain);

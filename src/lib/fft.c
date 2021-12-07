@@ -13,42 +13,42 @@
 
 double *
 fft(double * buffer, uint64_t size) {
-	complex * complexBuffer = malloc(sizeof(complex) * size);
+	cplx * cplxBuffer = malloc(sizeof(cplx) * size);
 	uint64_t i = 0;
 	for (; i < size; i++) {
-		complexBuffer[i] = CMPLX(buffer[i], 0);
+		cplxBuffer[i] = CMPLX(buffer[i], 0);
 	}
-	complex * freqComplex = fft_complex(complexBuffer, size);
-	free(complexBuffer);
+	cplx * freqcplx = fft_cplx(cplxBuffer, size);
+	free(cplxBuffer);
 	double * fDomain = malloc(sizeof(double) * size);
 	for (i = 0; i < size; i++) {
-		fDomain[i] = cabs(freqComplex[i]);
+		fDomain[i] = cabs(freqcplx[i]);
 	}
-	free(freqComplex);
+	free(freqcplx);
 	return fDomain;
 }
 
 double *
 ifft(double * buffer, uint64_t size) {
-	complex * complexBuffer = malloc(sizeof(complex) * size);
+	cplx * cplxBuffer = malloc(sizeof(cplx) * size);
 	uint64_t i = 0;
 	for (; i < size; i++) {
-		complexBuffer[i] = CMPLX(buffer[i], 0);
+		cplxBuffer[i] = CMPLX(buffer[i], 0);
 	}
-	complex * timeComplex = ifft_complex(complexBuffer, size);
-	free(complexBuffer);
+	cplx * timecplx = ifft_cplx(cplxBuffer, size);
+	free(cplxBuffer);
 	double * tDomain = malloc(sizeof(double) * size);
 	for (i = 0; i < size; i++) {
-		tDomain[i] = cabs(timeComplex[i]);
+		tDomain[i] = cabs(timecplx[i]);
 	}
-	free(timeComplex);
+	free(timecplx);
 	return tDomain;
 }
 
-complex *
-fft_complex(complex * buffer, uint64_t size) {
+cplx *
+fft_cplx(cplx * buffer, uint64_t size) {
 	// Create omega array for the first size primitive roots of unity
-	complex * omega = malloc(sizeof(complex) * size);
+	cplx * omega = malloc(sizeof(cplx) * size);
 	uint64_t i = 0;
 	for (; i < size; i++) {
 		omega[i] = CMPLX(
@@ -56,23 +56,23 @@ fft_complex(complex * buffer, uint64_t size) {
 			, sin(2 * M_PI * i)
 		);
 	}
-	complex * freqDomain = fft_helper(buffer, omega, size);
+	cplx * freqDomain = fft_helper(buffer, omega, size);
 	free(omega);
 	return freqDomain;
 }
 
-complex *
-ifft_complex(complex * buffer, uint64_t size) {
-	// For the inverse fft, the angle in the complex plane is inverted
+cplx *
+ifft_cplx(cplx * buffer, uint64_t size) {
+	// For the inverse fft, the angle in the cplx plane is inverted
 	// from that of the regular fft
-	complex * omega = malloc(sizeof(complex) * size);
+	cplx * omega = malloc(sizeof(cplx) * size);
 	for (; i < size; i++) {
 		omega[i] = CMPLX(
 			cos(2 * M_PI * i)
 			, -sin(2 * M_PI * i)
 		);
 	}
-	complex * timeDomain = fft_helper(buffer, omega, size);
+	cplx * timeDomain = fft_helper(buffer, omega, size);
 	free(omega);
 	// The IFFT must be reverse-scaled back down by n (the size)
 	for (i = 0; i < size; i++) {
@@ -81,11 +81,11 @@ ifft_complex(complex * buffer, uint64_t size) {
 	return timeDomain;
 }
 
-complex *
-fft_helper(complex * buffer, complex * omega, uint64_t size) {
-	complex * even = malloc(sizeof(complex) * size / 2);
-	complex * odd  = malloc(sizeof(complex) * size / 2);
-	complex * omegaHalf = malloc(sizeof(complex) * size / 2);
+cplx *
+fft_helper(cplx * buffer, cplx * omega, uint64_t size) {
+	cplx * even = malloc(sizeof(cplx) * size / 2);
+	cplx * odd  = malloc(sizeof(cplx) * size / 2);
+	cplx * omegaHalf = malloc(sizeof(cplx) * size / 2);
 	uint64_t i = 0;
 	for (; i < size / 2; i++) {
 		// Get the even and odd elements
@@ -95,14 +95,14 @@ fft_helper(complex * buffer, complex * omega, uint64_t size) {
 		omegaHalf[i] = omega[i] * omega[i];
 	}
 
-	complex * solution_even = fft_helper(even, omegaHalf, size / 2);
-	complex * solution_odd  = fft_helper(odd,  omegaHalf, size / 2);
+	cplx * solution_even = fft_helper(even, omegaHalf, size / 2);
+	cplx * solution_odd  = fft_helper(odd,  omegaHalf, size / 2);
 	// Free memory before we forget
 	free(even);
 	free(odd);
 	free(omegaHalf);
 	// Re-combine the even and odd solutions of the FFT
-	complex * solution = malloc(sizeof(complex) * size);
+	cplx * solution = malloc(sizeof(cplx) * size);
 	for (i = 0; i < size / 2; i++) {
 		solution[i] = solution_even[i] + omega[i] * solution_odd[i];
 		solution[i + (size / 2)] = solution_even[i] - omega[i] * solution_odd[i];

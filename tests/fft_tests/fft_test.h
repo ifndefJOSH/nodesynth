@@ -5,8 +5,10 @@
 
 #include <complex.h>
 
+typedef complex<double> cplx;
+
 double * random_array(int len);
-complex * random_complex_array(int len);
+cplx * random_cplx_array(int len);
 
 void fft_ifft_test();
 

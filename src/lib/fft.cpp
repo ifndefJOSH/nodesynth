@@ -11,6 +11,8 @@
 #include <stdlib.h>
 #include <math.h>
 
+// Dumb comment
+
 double *
 fft(double * buffer, uint64_t size) {
 	cplx * cplxBuffer = (cplx *) malloc(sizeof(cplx) * size);
@@ -52,8 +54,8 @@ fft_cplx(cplx * buffer, uint64_t size) {
 	uint64_t i = 0;
 	for (; i < size; i++) {
 		omega[i] = cplx(
-			cos(2 * M_PI * i)
-			, sin(2 * M_PI * i)
+			cos(2.0 * M_PI * (float) i / (float) size)
+			, sin(2.0 * M_PI * (float) i / (float) size)
 		);
 	}
 	cplx * freqDomain = fft_helper(buffer, omega, size);
@@ -69,8 +71,8 @@ ifft_cplx(cplx * buffer, uint64_t size) {
 	uint64_t i = 0;
 	for (; i < size; i++) {
 		omega[i] = cplx(
-			cos(2 * M_PI * i)
-			, -sin(2 * M_PI * i)
+			cos(2.0 * M_PI * (float) i / (float) size)
+			, -sin(2.0 * M_PI * (float) i / (float) size)
 		);
 	}
 	cplx * timeDomain = fft_helper(buffer, omega, size);
@@ -84,6 +86,11 @@ ifft_cplx(cplx * buffer, uint64_t size) {
 
 cplx *
 fft_helper(cplx * buffer, cplx * omega, uint64_t size) {
+	if (size == 1) {
+		cplx * ret = new cplx;
+		*ret = *buffer;
+		return ret;
+	}
 	cplx * even = (cplx *) malloc(sizeof(cplx) * size / 2);
 	cplx * odd  = (cplx *) malloc(sizeof(cplx) * size / 2);
 	cplx * omegaHalf = (cplx *) malloc(sizeof(cplx) * size / 2);

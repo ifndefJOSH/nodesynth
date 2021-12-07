@@ -9,42 +9,62 @@
 #include <stdio.h>
 #include <complex.h>
 
-#define TEST_ITERATIONS 200
+#define TEST_ITERATIONS 1 // 200
 #define UPPER_BOUND 10
+
+void
+print_array(double * arr, int size) {
+	printf("[");
+	for (int i = 0; i < size; i++) {
+		printf("%f, ", arr[i]);
+	}
+	printf("\b\b]\n");
+}
 
 double *
 random_array(int len) {
 	double * arr = new double[len]; // malloc(sizeof(double) * len);
+	// printf("Generating random array of type double and length %d", len);
 	for (int i = 0; i < len; i++) {
 		arr[i] = rand() / (RAND_MAX / UPPER_BOUND);
 	}
+	// printf("...done\n.");
 	return arr;
 }
 
 cplx *
 random_cplx_array(int len) {
 	cplx * arr = new cplx[len]; // malloc(sizeof(cplx) * len);
+	// printf("Generating a random array of type std::complex<double> and length %d", len);
 	for (int i = 0; i < len; i++) {
 		arr[i] = cplx(
 			rand() / (RAND_MAX / UPPER_BOUND)
 			, rand() / (RAND_MAX / UPPER_BOUND)
 		);
 	}
+	// printf("...done.\n");
 	return arr;
 }
 
 void
 fft_ifft_test() {
+	printf("Starting fft_ifft_test()\n");
 	for (int i = 0; i < TEST_ITERATIONS; i++) {
-		for (int size = 0b100000; size < 0b1000000000000; size *= 2) {
+		// printf("Starting test for iteration %d\n", i);
+		for (uint64_t size = 0b100; size < 0b1000; size *= 2) {
 			// Measure time taken by fft
 			double * time_domain = random_array(size);
+			printf("Time domain:\n\t");
+			print_array(time_domain, size);
 			clock_t fft_start = clock();
+			// printf("Starting fft for randomly generated array.\n");
 			double * freq_domain = fft(time_domain, size);
+			printf("Frequency domain:\n\t");
+			print_array(freq_domain, size);
 			clock_t fft_end = clock();
 			fprintf(
 				stderr
-				, "Time taken to compute the FFT for a double array of size %d was %f s"
+				, "Time taken to compute the FFT for a double array of size %d was %f s\n"
 				, size
 				, (float) (fft_end - fft_start) / CLOCKS_PER_SEC
 			);
@@ -54,7 +74,7 @@ fft_ifft_test() {
 			clock_t ifft_end = clock();
 			fprintf(
 				stderr
-				, "Time taken to compute the IFFT for a double array of size %d was %f s"
+				, "Time taken to compute the IFFT for a double array of size %d was %f s\n"
 				, size
 				, (float) (ifft_end - ifft_start) / CLOCKS_PER_SEC
 			);

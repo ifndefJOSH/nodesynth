@@ -22,8 +22,8 @@ JTest<T>::assert_equal(T a, T b) {
 template <typename T>
 void
 JTest<T>::assert_array_equal(T * a, int aLen, T * b, int bLen) {
-	assert_not_null(a);
-	assert_not_null(b);
+	// assert_not_null(a);
+	// assert_not_null(b);
 	if (aLen != bLen) {
 		std::cout << "[FAILED] Array is not equal length." << std::endl;
 		failed_tests++;
@@ -32,6 +32,19 @@ JTest<T>::assert_array_equal(T * a, int aLen, T * b, int bLen) {
 	for (int i = 0; i < aLen; i++) {
 		if (a[i] != b[i]) {
 			std::cout << "[FAILED] Array values are not equal." << std::endl;
+			// Print first array
+			std::cout << "\tFirst array (up to failing index): \n\t[";
+			for (int j = 0; j <= i; j++) {
+				std::cout << a[j] << ", ";
+			}
+			std::cout << "\b\b]\n";
+			// Print second array
+			std::cout << "\tSecond array (up to failing index): \n\t[";
+			for (int j = 0; j <= i; j++) {
+				std::cout << b[j] << ", ";
+			}
+			std::cout << "\b\b]\n";
+
 			failed_tests++;
 			return;
 		}

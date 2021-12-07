@@ -5,7 +5,8 @@
 
 #include <complex.h>
 
-typedef complex<double> cplx;
+// typedef std::complex<double> cplx;
+using cplx = std::complex<double>;
 
 double * random_array(int len);
 cplx * random_cplx_array(int len);

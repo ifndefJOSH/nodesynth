@@ -13,16 +13,16 @@
 
 double *
 fft(double * buffer, uint64_t size) {
-	cplx * cplxBuffer = malloc(sizeof(cplx) * size);
+	cplx * cplxBuffer = (cplx *) malloc(sizeof(cplx) * size);
 	uint64_t i = 0;
 	for (; i < size; i++) {
-		cplxBuffer[i] = CMPLX(buffer[i], 0);
+		cplxBuffer[i] = cplx(buffer[i], 0);
 	}
 	cplx * freqcplx = fft_cplx(cplxBuffer, size);
 	free(cplxBuffer);
-	double * fDomain = malloc(sizeof(double) * size);
+	double * fDomain = (double *) malloc(sizeof(double) * size);
 	for (i = 0; i < size; i++) {
-		fDomain[i] = cabs(freqcplx[i]);
+		fDomain[i] = std::abs(freqcplx[i]);
 	}
 	free(freqcplx);
 	return fDomain;
@@ -30,16 +30,16 @@ fft(double * buffer, uint64_t size) {
 
 double *
 ifft(double * buffer, uint64_t size) {
-	cplx * cplxBuffer = malloc(sizeof(cplx) * size);
+	cplx * cplxBuffer = (cplx *) malloc(sizeof(cplx) * size);
 	uint64_t i = 0;
 	for (; i < size; i++) {
-		cplxBuffer[i] = CMPLX(buffer[i], 0);
+		cplxBuffer[i] = cplx(buffer[i], 0);
 	}
 	cplx * timecplx = ifft_cplx(cplxBuffer, size);
 	free(cplxBuffer);
-	double * tDomain = malloc(sizeof(double) * size);
+	double * tDomain = (double *) malloc(sizeof(double) * size);
 	for (i = 0; i < size; i++) {
-		tDomain[i] = cabs(timecplx[i]);
+		tDomain[i] = std::abs(timecplx[i]);
 	}
 	free(timecplx);
 	return tDomain;
@@ -48,10 +48,10 @@ ifft(double * buffer, uint64_t size) {
 cplx *
 fft_cplx(cplx * buffer, uint64_t size) {
 	// Create omega array for the first size primitive roots of unity
-	cplx * omega = malloc(sizeof(cplx) * size);
+	cplx * omega = (cplx*) malloc(sizeof(cplx) * size);
 	uint64_t i = 0;
 	for (; i < size; i++) {
-		omega[i] = CMPLX(
+		omega[i] = cplx(
 			cos(2 * M_PI * i)
 			, sin(2 * M_PI * i)
 		);
@@ -65,9 +65,10 @@ cplx *
 ifft_cplx(cplx * buffer, uint64_t size) {
 	// For the inverse fft, the angle in the cplx plane is inverted
 	// from that of the regular fft
-	cplx * omega = malloc(sizeof(cplx) * size);
+	cplx * omega = (cplx *) malloc(sizeof(cplx) * size);
+	uint64_t i = 0;
 	for (; i < size; i++) {
-		omega[i] = CMPLX(
+		omega[i] = cplx(
 			cos(2 * M_PI * i)
 			, -sin(2 * M_PI * i)
 		);
@@ -83,9 +84,9 @@ ifft_cplx(cplx * buffer, uint64_t size) {
 
 cplx *
 fft_helper(cplx * buffer, cplx * omega, uint64_t size) {
-	cplx * even = malloc(sizeof(cplx) * size / 2);
-	cplx * odd  = malloc(sizeof(cplx) * size / 2);
-	cplx * omegaHalf = malloc(sizeof(cplx) * size / 2);
+	cplx * even = (cplx *) malloc(sizeof(cplx) * size / 2);
+	cplx * odd  = (cplx *) malloc(sizeof(cplx) * size / 2);
+	cplx * omegaHalf = (cplx *) malloc(sizeof(cplx) * size / 2);
 	uint64_t i = 0;
 	for (; i < size / 2; i++) {
 		// Get the even and odd elements
@@ -102,7 +103,7 @@ fft_helper(cplx * buffer, cplx * omega, uint64_t size) {
 	free(odd);
 	free(omegaHalf);
 	// Re-combine the even and odd solutions of the FFT
-	cplx * solution = malloc(sizeof(cplx) * size);
+	cplx * solution = (cplx *) malloc(sizeof(cplx) * size);
 	for (i = 0; i < size / 2; i++) {
 		solution[i] = solution_even[i] + omega[i] * solution_odd[i];
 		solution[i + (size / 2)] = solution_even[i] - omega[i] * solution_odd[i];

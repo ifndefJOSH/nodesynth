@@ -10,7 +10,8 @@
 #include <stdint.h>
 #include <complex.h>
 
-typedef double complex cplx;
+// typedef std::complex<double> cplx;
+using cplx = std::complex<double>;
 /**
  * Computes the DFT (Discrete Fourier Transform) using the FFT (Fast Fourier Transform) algorithm,
  * which is a divide and conquer algorithm of O(n) = n log(n). This wrapper takes a buffer in

@@ -1,6 +1,7 @@
 #include "fft_test.h"
 
 #include "../../src/lib/fft.h"
+#include "../jtest/jtest.h"
 
 // #include <random.h>
 #include <stdlib.h>
@@ -13,7 +14,7 @@
 
 double *
 random_array(int len) {
-	double * arr = malloc(sizeof(double) * len);
+	double * arr = new double[len]; // malloc(sizeof(double) * len);
 	for (int i = 0; i < len; i++) {
 		arr[i] = rand() / (RAND_MAX / UPPER_BOUND);
 	}
@@ -22,9 +23,9 @@ random_array(int len) {
 
 cplx *
 random_cplx_array(int len) {
-	cplx * arr = malloc(sizeof(cplx) * len);
+	cplx * arr = new cplx[len]; // malloc(sizeof(cplx) * len);
 	for (int i = 0; i < len; i++) {
-		arr[i] = CMPLX(
+		arr[i] = cplx(
 			rand() / (RAND_MAX / UPPER_BOUND)
 			, rand() / (RAND_MAX / UPPER_BOUND)
 		);

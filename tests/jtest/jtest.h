@@ -13,4 +13,6 @@ public:
 	static void assert_lt(T a, T b);
 	static void assert_lte(T a, T b);
 };
+
+
 #endif // JTEST_H_INCLUDED

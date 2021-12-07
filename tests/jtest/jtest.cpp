@@ -121,3 +121,7 @@ JTest<T>::assert_lte(T a, T b) {
 }
 
 
+#include <complex.h>
+// Forward-declare (explicit instantiation) classes
+template class JTest<double>;
+template class JTest<std::complex<double>>;

@@ -12,7 +12,7 @@ set(SOURCE_FILES
 	../jtest/jtest.h
 	# FFT files
 	../../src/lib/fft.h
-	../../src/lib/fft.c
+	../../src/lib/fft.cpp
 )
 
 add_executable(fft_test ${SOURCE_FILES})

@@ -84,8 +84,8 @@ namespace nodesynth {
 			void destroyWorkerThread();
 			// Data streams
 			MidiStream eventsIn;
-			AudioDataStream audioOutLeft;
-			AudioDataStream audioOutRight;
+			AudioDataStream * audioOutLeft;
+			AudioDataStream * audioOutRight;
 		protected:
 			/**
 			 * Updates all buffers in the node graph

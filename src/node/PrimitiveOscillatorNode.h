@@ -16,6 +16,9 @@
 
 #include "OscillatorNode.h"
 
+#include <complex.h>
+#include <fftw3.h>
+
 namespace nodesynth {
 	typedef unsigned char waveform_t;
 	enum WAVEFORMS {
@@ -52,7 +55,7 @@ namespace nodesynth {
 		virtual void update();
 	private:
 		waveform_t waveformType;
-		double ** temporaryBuffers;
+		fftw_complex ** temporaryBuffers;
 	};
 } // namespace nodesynth
 #endif // PRIMITIVEOSCILLATORNODE_H_INCLUDED

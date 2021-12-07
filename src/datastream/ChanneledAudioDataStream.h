@@ -16,6 +16,9 @@
 
 #include "DataStream.h"
 
+#include <complex.h>
+#include <fftw3.h>
+
 namespace nodesynth {
 	 class ChanneledAudioDataStream : DataStream {
 	public:
@@ -23,7 +26,7 @@ namespace nodesynth {
 		~ChanneledAudioDataStream();
 		virtual void updateNext();
 		virtual void exposeToReader();
-		double ** channeledAudio;
+		fftw_complex ** channeledAudio;
 	protected:
 	private:
 		uint8_t numMidiChannels;

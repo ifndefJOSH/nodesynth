@@ -9,7 +9,7 @@ find_package(FFTW3 ${FFTW_MIN_VERSION} REQUIRED)
 
 set(SOURCE_FILES
 	src/main.cpp
-	src/Arguments.c
+	src/Arguments.cpp
 	src/Arguments.h
 	src/core/NodeGraph.cpp
 	src/core/NodeGraph.h
@@ -25,41 +25,41 @@ set(SOURCE_FILES
 )
 
 set(NODE_FILES
-	AMModulatorNode.cpp
-	AMModulatorNode.h
-	ChorusNode.cpp
-	ChorusNode.h
-	CompressorNode.cpp
-	CompressorNode.h
-	EnvelopeNode.cpp
-	EnvelopeNode.h
-	EQNode.cpp
-	EQNode.h
-	FilterNode.cpp
-	FilterNode.h
-	FMModulatorNode.cpp
-	FMModulatorNode.h
-	FormantNode.cpp
-	FormantNode.h
-	LimiterNode.cpp
-	LimiterNode.h
-	ModulatorNode.cpp
-	Node.cpp
-	Node.h
-	OscillatorNode.cpp
-	OscillatorNode.h
-	PanningNode.cpp
-	PanningNode.h
-	PrimitiveFilterNode.cpp
-	PrimitiveFilterNode.h
-	PrimitiveOscillatorNode.cpp
-	PrimitiveOscillatorNode.h
-	ResamplerNode.cpp
-	ResamplerNode.h
-	SamplerNode.cpp
-	SamplerNode.h
-	WavetableOscillatorNode.cpp
-	WavetableOscillatorNode.h
+	src/node/AMModulatorNode.cpp
+	src/node/AMModulatorNode.h
+	src/node/ChorusNode.cpp
+	src/node/ChorusNode.h
+	src/node/CompressorNode.cpp
+	src/node/CompressorNode.h
+	src/node/EnvelopeNode.cpp
+	src/node/EnvelopeNode.h
+	src/node/EQNode.cpp
+	src/node/EQNode.h
+	src/node/FilterNode.cpp
+	src/node/FilterNode.h
+	src/node/FMModulatorNode.cpp
+	src/node/FMModulatorNode.h
+	src/node/FormantNode.cpp
+	src/node/FormantNode.h
+	src/node/LimiterNode.cpp
+	src/node/LimiterNode.h
+	src/node/ModulatorNode.cpp
+	src/node/Node.cpp
+	src/node/Node.h
+	src/node/OscillatorNode.cpp
+	src/node/OscillatorNode.h
+	src/node/PanningNode.cpp
+	src/node/PanningNode.h
+	src/node/PrimitiveFilterNode.cpp
+	src/node/PrimitiveFilterNode.h
+	src/node/PrimitiveOscillatorNode.cpp
+	src/node/PrimitiveOscillatorNode.h
+	src/node/ResamplerNode.cpp
+	src/node/ResamplerNode.h
+	src/node/SamplerNode.cpp
+	src/node/SamplerNode.h
+	src/node/WavetableOscillatorNode.cpp
+	src/node/WavetableOscillatorNode.h
 )
 
 set(FILTER_FILES

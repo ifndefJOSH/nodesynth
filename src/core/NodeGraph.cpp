@@ -71,7 +71,14 @@ NodeGraph::destroyWorkerThread(){
 
 void
 NodeGraph::updateAllBuffers(){
-	while (true) {
+	// Perform a depth first search to find the roots
+	std::vector<Node *> roots;
+	// TODO: Depth first search
 
+	while (true) {
+		for (Node * root : roots) {
+			// Tell that node to update itself and all of its successors
+			root->updateForward();
+		}
 	}
 }

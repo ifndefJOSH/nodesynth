@@ -20,3 +20,13 @@ void
 Node::addDataStreamToPorts(std::shared_ptr<DataStream> ds) {
 	ports.insert(ds.getName(), ds);
 }
+
+void
+Node::updateForward() {
+	this->update();
+	for (Node * child : this->children) {
+		child->updateForward();
+	}
+}
+
+

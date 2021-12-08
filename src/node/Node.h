@@ -17,6 +17,7 @@
 #include <map>
 #include <string>
 #include <memory>
+#include <memory>
 
 #include "../datastream/DataStream.h"
 #include "../core/Options.h"
@@ -26,6 +27,7 @@ namespace nodesynth {
 	public:
 		Node(const std::string name);
 		~Node();
+		void updateForward();
 		virtual void initializePorts() = 0;
 		virtual void update() = 0;
 		const std::string getName();
@@ -42,6 +44,9 @@ namespace nodesynth {
 		 * @param port The port to disconnect
 		 * */
 		virtual void disconnect(uint8_t port) = 0;
+		// Data so that the NodeGraph can perform a DFS and run it
+		std::vector<Node *> parents;
+		std::vector<Node *> children;
 	protected:
 		void addDataStreamToPorts(std::shared_ptr<DataStream> ds);
 	private:

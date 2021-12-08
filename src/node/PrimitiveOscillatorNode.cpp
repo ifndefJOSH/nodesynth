@@ -6,27 +6,6 @@ using namespace nodesynth;
 
 #define MAX_AMPLITUDE 1.0
 
-// Overloads for fftw_complex operators
-fftw_complex operator=(fftw_complex a, double b) {
-	fftw_complex c = a;
-	c[0] += b;
-	return c;
-}
-
-fftw_complex operator+(fftw_complex a, fftw_complex b) {
-	fftw_complex sol;
-	sol[0] = a[0] + b[0];
-	sol[1] = a[1] + b[1];
-	return sol;
-}
-
-fftw_complex operator-(fftw_complex a, fftw_complex b) {
-	fftw_complex sol;
-	sol[0] = a[0] - b[0];
-	sol[1] = a[1] - b[1];
-	return sol;
-}
-
 PrimitiveOscillatorNode::PrimitiveOscillatorNode() {
 	// temporaryBuffers = new double[
 	// Default type for our waveforms

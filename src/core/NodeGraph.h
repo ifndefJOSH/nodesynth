@@ -81,7 +81,7 @@ namespace nodesynth {
 			 * */
 			void destroyWorkerThread();
 			// Data streams
-			MidiStream eventsIn;
+			MidiStream * eventsIn;
 			AudioDataStream * audioOutLeft;
 			AudioDataStream * audioOutRight;
 		protected:
@@ -99,8 +99,8 @@ namespace nodesynth {
 			std::unordered_map<std::string, std::shared_ptr<Node>> graphMap;
 			std::shared_ptr<std::thread> workerThread;
 			// Output data streams
-			TimeDomainAudioStream audioOutLeftTime;
-			TimeDomainAudioStream audioOutRightTime;
+			TimeDomainAudioStream * audioOutLeftTime;
+			TimeDomainAudioStream * audioOutRightTime;
 
 			std::vector<Node *> roots;
 

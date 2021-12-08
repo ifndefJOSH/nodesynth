@@ -7,11 +7,22 @@ using namespace nodesynth;
 
 NodeGraph::NodeGraph()
 {
+	eventsIn = new MidiStream("EventsIn");
+	audioOutLeft = new AudioDataStream("AudioOutLeft");
+	audioOutRight = new AudioDataStream("AudioOutRight");
+	audioOutLeftTime = new TimeDomainAudioStream("AudioOutLeftTime");
+	audioOutRightTime = new TimeDomainAudioStream("AudioOutRightTime");
+
 
 }
 
 NodeGraph::~NodeGraph() {
 	destroyWorkerThread();
+	delete eventsIn;
+	delete audioOutLeft;
+	delete audioOutRight;
+	delete audioOutLeftTime;
+	delete audioOutRightTime;
 }
 
 std::shared_ptr<Node>
@@ -26,8 +37,9 @@ NodeGraph::insertNode(std::shared_ptr<Node> node){
 
 void
 NodeGraph::insertNode(Node * node) {
-	std::shared_ptr<Node> n = std::make_shared<Node> (*node);
-	this->insertNode(n);
+	// TODO: Figure out how to make_shared for an abstract class
+	// std::shared_ptr<Node> n = std::make_shared<Node> (*node);
+	// this->insertNode(n);
 }
 
 void
@@ -51,6 +63,7 @@ NodeGraph::connectPorts(
 ) {
 	std::shared_ptr<Node> fromNode = getNodeByName(fromNodeId);
 	std::shared_ptr<Node> toNode = getNodeByName(toNodeId);
+	return true; // TODO: fix
 }
 void
 NodeGraph::createWorkerThread(){
@@ -61,7 +74,7 @@ NodeGraph::createWorkerThread(){
 }
 void
 NodeGraph::destroyWorkerThread(){
-	delete workerThread;
+	// delete workerThread;
 }
 
 void
@@ -87,8 +100,8 @@ NodeGraph::findLeafs(Node * root) {
 	}
 	root->visited = true;
 	// Sees if we are a leaf
-	if (root->children.length() == 0) {
-		roots.add(root);
+	if (root->children.size() == 0) {
+		roots.push_back(root);
 	}
 	else {
 		for (Node * child : root->children) {

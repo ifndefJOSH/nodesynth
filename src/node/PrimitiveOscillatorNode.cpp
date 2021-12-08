@@ -1,5 +1,7 @@
 #include "PrimitiveOscillatorNode.h"
 
+#include "../core/cli/messages.h"
+
 using namespace nodesynth;
 
 #define MAX_AMPLITUDE 1.0
@@ -31,7 +33,7 @@ PrimitiveOscillatorNode::createSawToothWave(
 		}
 	}
 	// Create fourier transform and perform using fftw
-	fftw_plan p = fftw_plan_r2i_1d(Options::getBufferSize(), y, buffer, FFTW_FORWARD, FFTW_ESTIMATE);
+	fftw_plan p = fftw_plan_r2c_1d(Options::getBufferSize(), y, buffer, FFTW_FORWARD, FFTW_ESTIMATE);
 	fftw_execute(p);
 	fftw_destroy_plan(p);
 	// Scale the output so that we don't get a ton of clipping
@@ -62,7 +64,7 @@ PrimitiveOscillatorNode::createSquareWave(
 		}
 	}
 	// Perform FFT using FFTW
-	fftw_plan p = fftw_plan_r2i_1d(Options::getBufferSize(), y, buffer, FFTW_FORWARD, FFTW_ESTIMATE);
+	fftw_plan p = fftw_plan_r2c_1d(Options::getBufferSize(), y, buffer, FFTW_FORWARD, FFTW_ESTIMATE);
 	fftw_execute(p);
 	fftw_destroy_plan(p);
 	// Normalize the output so that it's not crazy overamplified.

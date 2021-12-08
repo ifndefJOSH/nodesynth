@@ -12,7 +12,7 @@ NodeSynth::NodeSynth(){
 	// Set client
 	client = jack_client_open(
 		"Nodesynth Instance"
-		, JackOpenOptions
+		, (jack_options_t) JackOpenOptions
 		, nullptr
 	);
 	if (!client) {
@@ -28,8 +28,8 @@ NodeSynth::~NodeSynth(){
 	graph->destroyWorkerThread();
 	delete parser;
 	delete graph;
-	if (jack_client_t) {
-		delete jack_client_t;
+	if (client) {
+		delete client;
 	}
 }
 
@@ -63,7 +63,7 @@ NodeSynth::setOptions() {
 	jack_get_sample_rate( /* JACK CLIENT */ client );
 	jack_get_buffer_size( /* JACK CLIENT */ client );
 #endif // NODESYNTH_JACK_COMPILE
-	Options::Initialize(
+	Options::initialize(
 		/* Sample Rate */
 		sampleRate
 		/* Buffer Size */

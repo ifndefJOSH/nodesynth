@@ -11,6 +11,9 @@ std::ostream& operator<<(std::ostream& os, const LogFile& logFile) {
 	if (!logFile.hasLogFile()) {
 		return os;
 	}
+	else {
+		return os;
+	}
 }
 
 void

@@ -11,7 +11,7 @@ PresetParser::PresetParser(NodeGraph * graph)
 	// Intentionally left empty
 }
 
-PresetParser:~PresetParser() {
+PresetParser::~PresetParser() {
 
 }
 

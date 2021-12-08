@@ -79,7 +79,7 @@ namespace nodesynth {
 	private:
 		static std::chrono::high_resolution_clock::time_point startTime;
 		static uint64_t sampleRate;
-		static uint64_t buffferSize;
+		static uint64_t bufferSize;
 		static uint8_t midiChannelCount;
 		static bool verbose;
 		static bool silent; // Silent takes priority over verbose

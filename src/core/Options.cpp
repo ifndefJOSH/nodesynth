@@ -9,7 +9,7 @@ using namespace nodesynth;
 void
 Options::initialize(uint64_t nSampleRate, uint64_t nBufferSize, uint8_t nMidiChannelCount){
 	sampleRate = nSampleRate;
-	buffferSize = nBufferSize;
+	bufferSize = nBufferSize;
 	midiChannelCount = nMidiChannelCount;
 	initialized = true;
 }
@@ -25,7 +25,7 @@ Options::getSampleRate(){
 }
 uint64_t
 Options::getBufferSize(){
-	return buffferSize;
+	return bufferSize;
 }
 
 

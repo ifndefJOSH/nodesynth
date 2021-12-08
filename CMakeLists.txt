@@ -97,4 +97,5 @@ set(DATASTREAM_FILES
 add_executable(nodesynth ${SOURCE_FILES} ${NODE_FILES} ${FILTER_FILES} ${DATASTREAM_FILES})
 
 target_link_libraries(${PROJECT_NAME} ${FFTW_LIBRARIES})
+
 # add_executable(xnodesynth ${SOURCE_FILES} ${NODE_FILES} ${FILTER_FILES} ${DATASTREAM_FILES} ${GUI_FILES})

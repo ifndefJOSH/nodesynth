@@ -10,3 +10,16 @@ Work in progress. This is a senior project which, when finished, will be a decla
   - This will be good for game developers who don't want to include tons of audio files, or people who want to write synthesizers.
 3. By writing human-readable nodesynth patch files in a language that will be kind of similar to Verilog
 4. As a GUI, similar to that in Bespokesynth (this will be the last thing I write)
+
+## Building Nodesynth
+
+**Nodesynth currently does not build**
+
+Nodesynth uses `cmake` and `clang` to build. Simply use
+
+```bash
+mkdir build
+cd build
+cmake ..
+make -j8
+```

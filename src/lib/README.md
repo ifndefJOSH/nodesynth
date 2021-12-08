@@ -1,3 +1,5 @@
+# DEPRECATED!!!!!! NODESYNTH USES `FFTW` INSTEAD OF THIS NOW!!
+
 # FFT Library
 
 A tiny FFT library for use in Nodesynth. This library makes a few assumptions:

@@ -7,15 +7,6 @@
 
 using namespace nodesynth;
 
-std::ostream& operator<<(std::ostream& os, const LogFile& logFile) {
-	if (!logFile.hasLogFile()) {
-		return os;
-	}
-	else {
-		return os;
-	}
-}
-
 void
 good(std::string msg){
 	// Return if we want to be silent
@@ -69,9 +60,14 @@ error(std::string msg){
 
 void
 errorExit(std::string msg, uint8_t exitCode){
-	error(msg);
-	if (!Options::getSilent()) {
-		std::cerr << "This error appears to be unrecoverable. Exiting with code " << exitCode << std::endl;
+	// Return if we want to be silent
+	if (Options::getSilent()) {
+		return;
 	}
+	std::cerr << BOLD(FRED("[UNRECOVERABLE ERROR]:"));
+	std::cerr << '(' << BOLD("Elapsed Time:") << Options::getElapsedTime().count() << " s)" << std::endl;
+	std::cerr << '\t' << msg << std::endl;
+
+	std::cerr << "This error appears to be unrecoverable. Exiting with code " << exitCode << std::endl;
 	std::exit(exitCode);
 }

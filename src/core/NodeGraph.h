@@ -17,8 +17,6 @@
 #include "../datastream/AudioDataStream.h"
 #include "../datastream/TimeDomainAudioStream.h"
 
-#include "PresetParser.cpp"
-
 #include <unordered_map>	// Used for graphMap
 #include <memory>			// Used for std::shared_ptr
 #include <string>			// Used for map keys

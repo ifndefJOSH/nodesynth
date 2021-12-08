@@ -6,11 +6,6 @@
 using namespace nodesynth;
 
 NodeGraph::NodeGraph()
-	: eventsIn("EventsIn")
-	, audioOutLeft("AudioOutLeft")
-	, audioOutRight("AudioOutRight")
-	, audioOutLeftTime("AudioOutLeftTime")
-	, audioOutRightTime("AudioOutRightTime")
 {
 
 }
@@ -61,7 +56,7 @@ void
 NodeGraph::createWorkerThread(){
 	// Bind worker thread to function
 	std::function<void(void)> workerProcess = std::bind(&NodeGraph::updateAllBuffers, this);
-	workerThread = std::make_shared<std::thread> (workerProcess)
+	workerThread = std::make_shared<std::thread> (workerProcess);
 
 }
 void
@@ -92,7 +87,7 @@ NodeGraph::findLeafs(Node * root) {
 	}
 	root->visited = true;
 	// Sees if we are a leaf
-	if (root->children.lenth() == 0) {
+	if (root->children.length() == 0) {
 		roots.add(root);
 	}
 	else {

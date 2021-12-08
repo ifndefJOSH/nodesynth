@@ -14,12 +14,4 @@ DataStream::getName() {
 	return name;
 }
 
-void
-DataStream::connect(const DataStream & ds) {
-	if (ds.type == type) {
-		next = ds;
-	}
-	else {
-		// TODO: raise error
-	}
-}
+

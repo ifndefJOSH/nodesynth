@@ -27,7 +27,7 @@ namespace nodesynth {
 	class MidiStream : DataStream {
 	public:
 		MidiStream(const std::string name);
-		virtual void updateNext();
+		~MidiStream();
 		void update();
 		MidiNote * notes;
 	protected:

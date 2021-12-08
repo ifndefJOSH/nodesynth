@@ -14,10 +14,6 @@ MidiStream::~MidiStream() {
 	delete notes;
 }
 
-void
-MidiStream::updateNext() {
-	memcpy(next.notes, notes, sizeof(MidiNote) * numMidiChannels);
-}
 
 void
 MidiStream::update() {

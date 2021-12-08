@@ -6,6 +6,7 @@ Node::Node(const std::string name) :
 	name(name)
 {
 	numChildrenSinceLastUpdate = 0;
+	visited = false;
 }
 
 Node::~Node() {

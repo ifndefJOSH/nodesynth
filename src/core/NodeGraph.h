@@ -91,12 +91,21 @@ namespace nodesynth {
 			 * Updates all buffers in the node graph
 			 * */
 			void updateAllBuffers();
+			/**
+			 * Traverses the node graph to find the leaf nodes
+			 *
+			 * @param root The root to traverse
+			 * */
+			void findLeafs(Node * root);
 		private:
 			std::unordered_map<std::string, std::shared_ptr<Node>> graphMap;
 			std::shared_ptr<std::thread> workerThread;
 			// Output data streams
 			TimeDomainAudioStream audioOutLeftTime;
 			TimeDomainAudioStream audioOutRightTime;
+
+			std::vector<Node *> roots;
+
 	};
 }
 

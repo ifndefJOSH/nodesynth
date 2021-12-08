@@ -71,14 +71,33 @@ NodeGraph::destroyWorkerThread(){
 
 void
 NodeGraph::updateAllBuffers(){
-	// Perform a depth first search to find the roots
-	std::vector<Node *> roots;
-	// TODO: Depth first search
-
+	// Perform a breadth-first search to find the roots
+	for (Node * root : this->roots) {
+		this->findLeafs(root);
+	}
 	while (true) {
 		for (Node * root : roots) {
 			// Tell that node to update itself and all of its successors
 			root->updateForward();
+		}
+	}
+}
+
+void
+NodeGraph::findLeafs(Node * root) {
+	// Base case that we should never reach but is here to avoid a segfault
+	// (just in case we have a nullptr in the vector list)
+	if (root == nullptr || root->visited) {
+		return;
+	}
+	root->visited = true;
+	// Sees if we are a leaf
+	if (root->children.lenth() == 0) {
+		roots.add(root);
+	}
+	else {
+		for (Node * child : root->children) {
+			findLeafs(child);
 		}
 	}
 }

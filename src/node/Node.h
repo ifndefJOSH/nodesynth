@@ -17,7 +17,7 @@
 #include <map>
 #include <string>
 #include <memory>
-#include <memory>
+#include <vector>
 
 #include "../datastream/DataStream.h"
 #include "../core/Options.h"
@@ -49,6 +49,7 @@ namespace nodesynth {
 		std::vector<Node *> children;
 		// Number of children that have been updated (must equal length of children)
 		uint8_t numChildrenSinceLastUpdate;
+		bool visited;
 	protected:
 		void addDataStreamToPorts(std::shared_ptr<DataStream> ds);
 	private:

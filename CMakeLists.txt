@@ -1,11 +1,17 @@
 cmake_minimum_required(VERSION 3.16)
 project(nodesynth)
 
+set(CMAKE_SOURCE_DIR src)
+
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMakeModules" ${CMAKE_MODULE_PATH})
+
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(FFTW_MIN_VERSION "3.3.9")
 find_package(FFTW3 ${FFTW_MIN_VERSION} REQUIRED)
+include_directories(${FFTW_INCLUDES})
 
 set(SOURCE_FILES
 	src/main.cpp
@@ -90,4 +96,5 @@ set(DATASTREAM_FILES
 
 add_executable(nodesynth ${SOURCE_FILES} ${NODE_FILES} ${FILTER_FILES} ${DATASTREAM_FILES})
 
+target_link_libraries(${PROJECT_NAME} ${FFTW_LIBRARIES})
 # add_executable(xnodesynth ${SOURCE_FILES} ${NODE_FILES} ${FILTER_FILES} ${DATASTREAM_FILES} ${GUI_FILES})

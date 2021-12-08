@@ -1,5 +1,8 @@
 #include "OscillatorNode.h"
 #include <iostream>
+#include <cmath>
+
+#define TUNING 440
 
 using namespace nodesynth;
 
@@ -23,4 +26,9 @@ OscillatorNode::disconnect(uint8_t port) {
 		default:
 			std::cerr << "[ERROR]: Port number " << port << " is unknown.\n";
 	}
+}
+
+double
+frequencyFromMidiNote(uint8_t midiNote) {
+	return TUNING * pow(2, ((double) midiNote - 69.0) / 12);
 }

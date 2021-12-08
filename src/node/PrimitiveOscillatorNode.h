@@ -19,7 +19,7 @@
 // According to https://fftw.org/fftw3_doc/Complex-numbers.html, including
 // <complex.h> BEFORE <fftw3.h> allows us to use the builtin C/++ complex
 // type and overloaded operators
-#include <complex.h>
+#include <complex>
 #include <fftw3.h>
 
 namespace nodesynth {

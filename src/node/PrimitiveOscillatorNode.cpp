@@ -24,14 +24,14 @@ PrimitiveOscillatorNode::createSawToothWave(
 	, uint8_t channel
 ) {
 	// Creates a sawtooth wave of a certain frequency in a certain channel
-	fftw_complex * buffer = out.channeledAudio[channel];
-	fftw_complex * y = new fftw_complex[Options::getBufferSize()];
+	std::complex<double> * buffer = out.channeledAudio[channel];
+	std::complex<double> * y = new std::complex<double>[Options::getBufferSize()];
 	double incrementRate = 2 * frequency * Options::getSampleRate();
 	y[0] = -1;
 	// Build in the time domain
 	for (int i = 1; i < Options::getBufferSize(); i++) {
 		y[i] = y[i - 1] + incrementRate;
-		if (y[i] > 1) {
+		if (y[i].real() > 1) {
 			y[i] = -1;
 		}
 	}
@@ -39,11 +39,8 @@ PrimitiveOscillatorNode::createSawToothWave(
 	fftw_one(p, y, buffer);
 	// Scale the output so that we don't get a ton of clipping
 	for (int i = 0; i < Options::getBufferSize(); i++) {
-		buffer[i][0] /= (double) Options::getBufferSize();
-		buffer[i][0] *= MAX_AMPLITUDE * velocity;
-		buffer[i][1] /= (double) Options::getBufferSize();
-		buffer[i][1] *= MAX_AMPLITUDE * velocity;
-
+		buffer[i] /= (double) Options::getBufferSize();
+		buffer[i] *= MAX_AMPLITUDE * velocity;
 	}
 	// Free resources
 	delete[] y;
@@ -55,9 +52,9 @@ PrimitiveOscillatorNode::createSquareWave(
 	, double velocity
 	, uint8_t channel
 ) {
-	fftw_complex * buffer = out.channeledAudio[channel];
+	std::complex<double> * buffer = out.channeledAudio[channel];
 	uint32_t samplesPerPeriod = Options::getSampleRate() / frequency;
-	fftw_complex * y = new fftw_complex[Options::getBufferSize()];
+	std::complex<double> * y = new std::complex<double>[Options::getBufferSize()];
 	// Create our wave in the time domain
 	for (int i = 0; i < Options::getBufferSize(); i++) {
 		if (i % samplesPerPeriod > samplesPerPeriod / 2) {
@@ -71,8 +68,7 @@ PrimitiveOscillatorNode::createSquareWave(
 	fftw_one(p, y, buffer);
 	// Normalize the output so that it's not crazy overamplified.
 	for (int i = 0; i < Options::getBufferSize(); i++) {
-		buffer[i][0] /= (double) Options::getBufferSize();
-		buffer[i][1] /= (double) Options::getBufferSize();
+		buffer[i] /= (double) Options::getBufferSize();
 
 	}
 	// Free resources
@@ -91,15 +87,13 @@ PrimitiveOscillatorNode::createSineWave(
 		and then convert into frequency domain using the fft
 	*/
 	// Get the output buffer we are trying to write to
-	fftw_complex * buffer = out.channeledAudio[channel];
+	std::complex<double> * buffer = out.channeledAudio[channel];
 	double nyquistFrequency = Options::getSampleRate() / 2;
 	for (int i = 0; i < Options::getBufferSize(); i++) {
-		buffer[i][0] = 0;
-		buffer[i][1] = 0;
+		buffer[i] = 0;
 	}
 	int freqIndex = frequency * (Options::getBufferSize() / nyquistFrequency);
-	buffer[freqIndex][0] = MAX_AMPLITUDE * velocity;
-	buffer[freqIndex][1] = MAX_AMPLITUDE * velocity;
+	buffer[freqIndex] = MAX_AMPLITUDE * velocity;
 }
 void
 PrimitiveOscillatorNode::createTriangleWave(
@@ -107,10 +101,10 @@ PrimitiveOscillatorNode::createTriangleWave(
 	, double velocity
 	, uint8_t channel
 ) {
-	fftw_complex * buffer = out.channeledAudio[channel];
+	std::complex<double> * buffer = out.channeledAudio[channel];
 	uint32_t samplesPerPeriod = Options::getSampleRate() / frequency;
 	// In the time domain, we only need to create a "double"
-	fftw_complex * y = new fftw_complex[Options::getBufferSize()];
+	std::complex<double> * y = new std::complex<double>[Options::getBufferSize()];
 	// Create our wave in the time domain
 	uint16_t quarterBuf = Options::getBufferSize() / 4;
 	double incrementRate = MAX_AMPLITUDE * velocity / (Options::getBufferSize() / 2);
@@ -129,8 +123,7 @@ PrimitiveOscillatorNode::createTriangleWave(
 	fftw_one(p, y, buffer);
 	// Normalize the output so that it's not crazy overamplified.
 	for (int i = 0; i < Options::getBufferSize(); i++) {
-		buffer[i][0] /= (double) Options::getBufferSize();
-		buffer[i][1] /= (double) Options::getBufferSize();
+		buffer[i] /= (double) Options::getBufferSize();
 	}
 	// Free resources
 	delete[] y;

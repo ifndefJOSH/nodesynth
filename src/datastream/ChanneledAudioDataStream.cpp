@@ -10,12 +10,12 @@ ChanneledAudioDataStream::ChanneledAudioDataStream(const std::string name) :
 	// Set up our MIDI channels
 	this->numMidiChannels = Options::getMidiChannelCount();
 	this->bufSize = Options::getBufferSize();
-	this->channeledAudio = new (fftw_complex *)[numMidiChannels];
+	this->channeledAudio = new (std::complex<double> *)[numMidiChannels];
 	for (uint8_t i = 0; i < numMidiChannels; i++) {
 		// Allocate new MIDI channel
-		this->channeledAudio[i] = new (fftw_complex)[bufSize];
+		this->channeledAudio[i] = new (std::complex<double>)[bufSize];
 	}
-	copySize = sizeof(fftw_complex) * bufSize;
+	copySize = sizeof(std::complex<double>) * bufSize;
 }
 
 ChanneledAudioDataStream::~ChanneledAudioDataStream() {

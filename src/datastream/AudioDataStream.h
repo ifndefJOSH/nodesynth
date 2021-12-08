@@ -16,15 +16,14 @@
 
 #include "DataStream.h"
 
-#include <complex.h>
-#include <fftw3.h>
+#include <complex>
 
 namespace nodesynth {
 	class AudioDataStream : DataStream{
 	public:
 		AudioDataStream(const std::string name);
 		virtual void updateNext();
-		fftw_complex * audio;
+		std::complex<double> * audio;
 	protected:
 	private:
 		uint64_t bufSize;

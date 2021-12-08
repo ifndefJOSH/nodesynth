@@ -6,7 +6,7 @@ AudioDataStream::AudioDataStream(const std::string name)
 	: DataStream(name, streamtype::AUDIO)
 {
 	this->bufSize = Options::getBufferSize();
-	this->audio = new fftw_complex[bufSize];
+	this->audio = new std::complex<double>[bufSize];
 }
 
 AudioDataStream::~AudioDataStream() {

@@ -6,12 +6,36 @@ using namespace nodesynth;
 
 #define MAX_AMPLITUDE 1.0
 
-#include <fftw3.h>
+// Overloads for fftw_complex operators
+fftw_complex operator=(fftw_complex a, double b) {
+	fftw_complex c = a;
+	c[0] += b;
+	return c;
+}
+
+fftw_complex operator+(fftw_complex a, fftw_complex b) {
+	fftw_complex sol;
+	sol[0] = a[0] + b[0];
+	sol[1] = a[1] + b[1];
+	return sol;
+}
+
+fftw_complex operator-(fftw_complex a, fftw_complex b) {
+	fftw_complex sol;
+	sol[0] = a[0] - b[0];
+	sol[1] = a[1] - b[1];
+	return sol;
+}
 
 PrimitiveOscillatorNode::PrimitiveOscillatorNode() {
 	// temporaryBuffers = new double[
 	// Default type for our waveforms
 	waveformType = WAVEFORMS::SAWTOOTH;
+	p = fftw_create_plan(Options::getBufferSize(), FFTW_FORWARD, FFTW_ESTIMATE);
+}
+
+PrimitiveOscillatorNode::~PrimitiveOscillatorNode() {
+
 }
 
 void
@@ -33,13 +57,14 @@ PrimitiveOscillatorNode::createSawToothWave(
 		}
 	}
 	// Create fourier transform and perform using fftw
-	fftw_plan p = fftw_plan_r2c_1d(Options::getBufferSize(), y, buffer, FFTW_FORWARD, FFTW_ESTIMATE);
-	fftw_execute(p);
-	fftw_destroy_plan(p);
+	fftw_one(p, y, buffer);
 	// Scale the output so that we don't get a ton of clipping
 	for (int i = 0; i < Options::getBufferSize(); i++) {
-		buffer[i] /= (double) Options::getBufferSize();
-		buffer[i] *= MAX_AMPLITUDE * velocity;
+		buffer[i][0] /= (double) Options::getBufferSize();
+		buffer[i][0] *= MAX_AMPLITUDE * velocity;
+		buffer[i][1] /= (double) Options::getBufferSize();
+		buffer[i][1] *= MAX_AMPLITUDE * velocity;
+
 	}
 	// Free resources
 	delete[] y;
@@ -64,12 +89,12 @@ PrimitiveOscillatorNode::createSquareWave(
 		}
 	}
 	// Perform FFT using FFTW
-	fftw_plan p = fftw_plan_r2c_1d(Options::getBufferSize(), y, buffer, FFTW_FORWARD, FFTW_ESTIMATE);
-	fftw_execute(p);
-	fftw_destroy_plan(p);
+	fftw_one(p, y, buffer);
 	// Normalize the output so that it's not crazy overamplified.
 	for (int i = 0; i < Options::getBufferSize(); i++) {
-		buffer[i] /= (double) Options::getBufferSize();
+		buffer[i][0] /= (double) Options::getBufferSize();
+		buffer[i][1] /= (double) Options::getBufferSize();
+
 	}
 	// Free resources
 	delete[] y;
@@ -90,10 +115,12 @@ PrimitiveOscillatorNode::createSineWave(
 	fftw_complex * buffer = out.channeledAudio[channel];
 	double nyquistFrequency = Options::getSampleRate() / 2;
 	for (int i = 0; i < Options::getBufferSize(); i++) {
-		buffer[i] = 0;
+		buffer[i][0] = 0;
+		buffer[i][1] = 0;
 	}
 	int freqIndex = frequency * (Options::getBufferSize() / nyquistFrequency);
-	buffer[freqIndex] = MAX_AMPLITUDE * velocity;
+	buffer[freqIndex][0] = MAX_AMPLITUDE * velocity;
+	buffer[freqIndex][1] = MAX_AMPLITUDE * velocity;
 }
 void
 PrimitiveOscillatorNode::createTriangleWave(
@@ -103,6 +130,7 @@ PrimitiveOscillatorNode::createTriangleWave(
 ) {
 	fftw_complex * buffer = out.channeledAudio[channel];
 	uint32_t samplesPerPeriod = Options::getSampleRate() / frequency;
+	// In the time domain, we only need to create a "double"
 	fftw_complex * y = new fftw_complex[Options::getBufferSize()];
 	// Create our wave in the time domain
 	uint16_t quarterBuf = Options::getBufferSize() / 4;
@@ -119,12 +147,11 @@ PrimitiveOscillatorNode::createTriangleWave(
 		y[3 * quarterBuf + i] = y[3 * quarterBuf + i - 1] + incrementRate;
 	}
 	// Perform FFT using FFTW
-	fftw_plan p = fftw_plan_r2r_1d(Options::getBufferSize(), y, buffer, FFTW_FORWARD, FFTW_ESTIMATE);
-	fftw_execute(p);
-	fftw_destroy_plan(p);
+	fftw_one(p, y, buffer);
 	// Normalize the output so that it's not crazy overamplified.
 	for (int i = 0; i < Options::getBufferSize(); i++) {
-		buffer[i] /= (double) Options::getBufferSize();
+		buffer[i][0] /= (double) Options::getBufferSize();
+		buffer[i][1] /= (double) Options::getBufferSize();
 	}
 	// Free resources
 	delete[] y;
@@ -138,29 +165,29 @@ PrimitiveOscillatorNode::update() {
 		switch (waveformType) {
 			case WAVEFORMS::SAWTOOTH:
 				createSawToothWave(
-					frequencyFromMidiNote(notesIn[i].note)
-					, notesIn[i].velocity
+					frequencyFromMidiNote(notesIn->notes[i].note)
+					, notesIn->notes[i].velocity
 					, i
 				);
 				break;
 			case WAVEFORMS::SQUARE:
 				createSquareWave(
-					frequencyFromMidiNote(notesIn[i].note)
-					, notesIn[i].velocity
+					frequencyFromMidiNote(notesIn->notes[i].note)
+					, notesIn->notes[i].velocity
 					, i
 				);
 				break;
 			case WAVEFORMS::SINE:
 				createSineWave(
-					frequencyFromMidiNote(notesIn[i].note)
-					, notesIn[i].velocity
+					frequencyFromMidiNote(notesIn->notes[i].note)
+					, notesIn->notes[i].velocity
 					, i
 				);
 				break;
 			case WAVEFORMS::TRIANGLE:
 				createTriangleWave(
-					frequencyFromMidiNote(notesIn[i].note)
-					, notesIn[i].velocity
+					frequencyFromMidiNote(notesIn->notes[i].note)
+					, notesIn->notes[i].velocity
 					, i
 				);
 				break;

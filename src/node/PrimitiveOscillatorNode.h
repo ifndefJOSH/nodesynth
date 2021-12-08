@@ -16,6 +16,9 @@
 
 #include "OscillatorNode.h"
 
+// According to https://fftw.org/fftw3_doc/Complex-numbers.html, including
+// <complex.h> BEFORE <fftw3.h> allows us to use the builtin C/++ complex
+// type and overloaded operators
 #include <complex.h>
 #include <fftw3.h>
 
@@ -30,6 +33,7 @@ namespace nodesynth {
 	 class PrimitiveOscillatorNode : OscillatorNode {
 	public:
 		PrimitiveOscillatorNode();
+		~PrimitiveOscillatorNode();
 	protected:
 		void createSawToothWave(
 			double frequency
@@ -56,6 +60,7 @@ namespace nodesynth {
 	private:
 		waveform_t waveformType;
 		fftw_complex ** temporaryBuffers;
+		fftw_plan p;
 	};
 } // namespace nodesynth
 #endif // PRIMITIVEOSCILLATORNODE_H_INCLUDED

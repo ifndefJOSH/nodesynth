@@ -47,6 +47,8 @@ namespace nodesynth {
 		// Data so that the NodeGraph can perform a DFS and run it
 		std::vector<Node *> parents;
 		std::vector<Node *> children;
+		// Number of children that have been updated (must equal length of children)
+		uint8_t numChildrenSinceLastUpdate;
 	protected:
 		void addDataStreamToPorts(std::shared_ptr<DataStream> ds);
 	private:

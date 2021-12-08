@@ -5,7 +5,7 @@ using namespace nodesynth;
 Node::Node(const std::string name) :
 	name(name)
 {
-	// Intentionally left empty
+	numChildrenSinceLastUpdate = 0;
 }
 
 Node::~Node() {
@@ -23,6 +23,13 @@ Node::addDataStreamToPorts(std::shared_ptr<DataStream> ds) {
 
 void
 Node::updateForward() {
+	// Don't update until all children have been update
+	if (numChildrenSinceLastUpdate != this->children.length() - 1) {
+		numChildrenSinceLastUpdate++;
+		return;
+	}
+	// Reset the number of children since last update
+	numChildrenSinceLastUpdate = 0;
 	this->update();
 	for (Node * child : this->children) {
 		child->updateForward();

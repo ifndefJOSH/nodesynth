@@ -31,8 +31,8 @@ Node::updateForward() {
 	// Reset the number of children since last update
 	numChildrenSinceLastUpdate = 0;
 	this->update();
-	for (Node * child : this->children) {
-		child->updateForward();
+	for (Node * parent : this->parents) {
+		parent->updateForward();
 	}
 }
 

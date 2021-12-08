@@ -10,7 +10,6 @@ PrimitiveOscillatorNode::PrimitiveOscillatorNode() {
 	// temporaryBuffers = new double[
 	// Default type for our waveforms
 	waveformType = WAVEFORMS::SAWTOOTH;
-	p = fftw_create_plan(Options::getBufferSize(), FFTW_FORWARD, FFTW_ESTIMATE);
 }
 
 PrimitiveOscillatorNode::~PrimitiveOscillatorNode() {
@@ -36,7 +35,15 @@ PrimitiveOscillatorNode::createSawToothWave(
 		}
 	}
 	// Create fourier transform and perform using fftw
-	fftw_one(p, y, buffer);
+	p = fftw_plan_dft_1d(
+		Options::getBufferSize()
+		, reinterpret_cast<fftw_complex *>(y)
+		, reinterpret_cast<fftw_complex *>(buffer)
+		, FFTW_FORWARD
+		, FFTW_ESTIMATE
+	);
+	fftw_execute(p);
+	fftw_destroy_plan(p);
 	// Scale the output so that we don't get a ton of clipping
 	for (int i = 0; i < Options::getBufferSize(); i++) {
 		buffer[i] /= (double) Options::getBufferSize();
@@ -65,7 +72,15 @@ PrimitiveOscillatorNode::createSquareWave(
 		}
 	}
 	// Perform FFT using FFTW
-	fftw_one(p, y, buffer);
+	p = fftw_plan_dft_1d(
+		Options::getBufferSize()
+		, reinterpret_cast<fftw_complex *>(y)
+		, reinterpret_cast<fftw_complex *>(buffer)
+		, FFTW_FORWARD
+		, FFTW_ESTIMATE
+	);
+	fftw_execute(p);
+	fftw_destroy_plan(p);
 	// Normalize the output so that it's not crazy overamplified.
 	for (int i = 0; i < Options::getBufferSize(); i++) {
 		buffer[i] /= (double) Options::getBufferSize();
@@ -120,7 +135,16 @@ PrimitiveOscillatorNode::createTriangleWave(
 		y[3 * quarterBuf + i] = y[3 * quarterBuf + i - 1] + incrementRate;
 	}
 	// Perform FFT using FFTW
-	fftw_one(p, y, buffer);
+	p = fftw_plan_dft_1d(
+		Options::getBufferSize()
+		, reinterpret_cast<fftw_complex *>(y)
+		, reinterpret_cast<fftw_complex *>(buffer)
+		, FFTW_FORWARD
+		, FFTW_ESTIMATE
+	);
+	fftw_execute(p);
+	fftw_destroy_plan(p);
+
 	// Normalize the output so that it's not crazy overamplified.
 	for (int i = 0; i < Options::getBufferSize(); i++) {
 		buffer[i] /= (double) Options::getBufferSize();

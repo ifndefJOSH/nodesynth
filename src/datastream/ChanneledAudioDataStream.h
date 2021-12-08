@@ -25,7 +25,6 @@ namespace nodesynth {
 		ChanneledAudioDataStream(const std::string name);
 		~ChanneledAudioDataStream();
 		virtual void updateNext();
-		virtual void exposeToReader();
 		fftw_complex ** channeledAudio;
 	protected:
 	private:

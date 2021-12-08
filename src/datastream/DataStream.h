@@ -9,7 +9,7 @@
  * which aims to create a declarative Prolog-like language for musical synthesis. Eventually, I
  * also plan to create a GUI, similar to those in Blender, Natron, or Carla.
  **/
-		
+
 
 #ifndef DATASTREAM_H_INCLUDED
 #define DATASTREAM_H_INCLUDED
@@ -44,7 +44,6 @@ namespace nodesynth {
 		void connect(const DataStream & ds);
 		const streamtype getStreamType();
 		virtual void updateNext() = 0;
-		virtual void exposeToReader() = 0;
 	protected:
 		const streamtype type;
 		DataStream & next;

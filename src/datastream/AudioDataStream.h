@@ -24,7 +24,6 @@ namespace nodesynth {
 	public:
 		AudioDataStream(const std::string name);
 		virtual void updateNext();
-		virtual void exposeToReader();
 		fftw_complex * audio;
 	protected:
 	private:

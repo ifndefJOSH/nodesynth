@@ -44,6 +44,7 @@ namespace nodesynth {
 		void connect(const DataStream & ds);
 		const streamtype getStreamType();
 		virtual void updateNext() = 0;
+		std::string getName();
 	protected:
 		const streamtype type;
 		DataStream & next;

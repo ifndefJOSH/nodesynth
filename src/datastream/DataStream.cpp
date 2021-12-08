@@ -9,6 +9,11 @@ DataStream::DataStream(const std::string name, streamtype type)
 	// Intentionally left empty
 }
 
+std::string
+DataStream::getName() {
+	return name;
+}
+
 void
 DataStream::connect(const DataStream & ds) {
 	if (ds.type == type) {

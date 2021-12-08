@@ -19,13 +19,13 @@ Node::getName() {
 
 void
 Node::addDataStreamToPorts(std::shared_ptr<DataStream> ds) {
-	ports.insert(ds.getName(), ds);
+	// ports.insert(ds->getName(), ds);
 }
 
 void
 Node::updateForward() {
 	// Don't update until all children have been update
-	if (numChildrenSinceLastUpdate != this->children.length() - 1) {
+	if (numChildrenSinceLastUpdate != this->children.size() - 1) {
 		numChildrenSinceLastUpdate++;
 		return;
 	}

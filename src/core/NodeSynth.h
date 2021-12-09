@@ -37,7 +37,7 @@ namespace nodesynth {
 	/**
 	 * This function is called every processing cycle
 	 * */
-	int inprocess(jack_nframes_t nframes, void * arg);
+	int inprocess(jack_nframes_t nframes, port_pair_t * arg);
 	/**
 	 * Called when Nodesynth is set up within JACK
 	 * */
@@ -45,7 +45,7 @@ namespace nodesynth {
 	/**
 	 * Called when Nodesynth is finished within JACK
 	 * */
-	void jack_finish(void * arg);
+	void jack_finish(port_pair_t * arg);
 #endif // NODESYNTH_JACK_COMPILE
 	class NodeSynth {
 	public:
@@ -55,9 +55,12 @@ namespace nodesynth {
 		void readPresetFile(std::string file);
 		void writePresetFile(std::string file);
 		void setOptions();
+#ifdef NODESYNTH_JACK_COMPILE
+		static void setClient(jack_client_t * clientCurrent_n);
+#endif // NODESYNTH_JACK_COMPILE
 	protected:
 #ifdef NODESYNTH_JACK_COMPILE
-
+		inline static jack_client_t * clientCurrent;
 #endif // NODESYNTH_JACK_COMPILE
 	private:
 		PresetParser * parser;

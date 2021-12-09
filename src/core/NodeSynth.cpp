@@ -10,10 +10,14 @@ using namespace nodesynth;
 // Non-class functions
 
 int
-inprocess(jack_nframes_t nframes, void * arg) {
+inprocess(jack_nframes_t nframes, port_pair_t * arg) {
 	port_pair_t * pp = arg;
-	jack_default_audio_sample_t * out = jack_port_get_buffer(pp->output_port, nframes);
-	jack_default_midi_sample_t * in = jack_port_get_buffer(pp->input_port, nframes);
+	jack_default_audio_sample_t * out_left =
+			(jack_default_audio_sample_t *) jack_port_get_buffer(pp->output_port_left, nframes);
+	jack_default_audio_sample_t * out_right =
+			(jack_default_audio_sample_t *) jack_port_get_buffer(pp->output_port_right, nframes);
+	jack_default_audio_sample_t * in =
+			(jack_default_audio_sample_t *) jack_port_get_buffer(pp->input_port, nframes);
 
 	// TODO: Get the output from the NodeGraph
 
@@ -22,6 +26,9 @@ inprocess(jack_nframes_t nframes, void * arg) {
 
 int
 jack_initialize(jack_client_t * client, const char * load_init) {
+	// Set the static client pointer
+	NodeSynth::setClient(client);
+
 	// Create ports in our port_pair_t
 	port_pair_t * pp = new port_pair_t;
 
@@ -57,16 +64,17 @@ jack_initialize(jack_client_t * client, const char * load_init) {
 	jack_activate(client);
 
 	// Attempt to connect to I/O ports
-	if (jack_connect(client, "14:Midi Through:0:Midi Through Port-0", jack_port_name(pp->input_port)) {
+	if (jack_connect(client, "14:Midi Through:0:Midi Through Port-0", jack_port_name(pp->input_port))) {
 		error("Unable to connect to the default MIDI input. Please open QJackCtl and manually connect.");
 		return 1;
 	}
 	if (
 		jack_connect(client, jack_port_name(pp->output_port_left), "system:playback_1") ||
-		jack_connect(client, jack_port_name(pp->output_port_right), "system:playback_2") {
+		jack_connect(client, jack_port_name(pp->output_port_right), "system:playback_2")
+	)
+	{
 			error(
-				"Unable to connect to the system output! Either system:playback_1 or system:playback_2"
-				+ " was undefined! Please open QJackCtl and connect Nodesynth manually."
+				"Unable to connect to the system output! Either system:playback_1 or system:playback_2  was undefined! Please open QJackCtl and connect Nodesynth manually."
 			);
 		return 1;
 	}
@@ -74,9 +82,9 @@ jack_initialize(jack_client_t * client, const char * load_init) {
 }
 
 void
-jack_finish(void * arg) {
+jack_finish(port_pair_t * arg) {
 	if (arg) {
-		delete (port_pair_t *) arg;
+		delete arg;
 	}
 }
 
@@ -84,17 +92,6 @@ jack_finish(void * arg) {
 // Class-member methods
 
 NodeSynth::NodeSynth(){
-#ifdef NODESYNTH_JACK_COMPILE
-	// Set client
-	client = jack_client_open(
-		"Nodesynth Instance"
-		, (jack_options_t) JackOpenOptions
-		, nullptr
-	);
-	if (!client) {
-		errorExit("JACK client is null!");
-	}
-#endif // NODESYNTH_JACK_COMPILE
 	this->setOptions();
 	graph = new NodeGraph();
 	parser = new PresetParser(graph);
@@ -133,8 +130,8 @@ NodeSynth::setOptions() {
 	uint64_t bufferSize = DEFAULT_BUFFER_SIZE;
 	uint8_t midiCount = DEFAULT_MIDI_CHANNEL_COUNT;
 #ifdef NODESYNTH_JACK_COMPILE
-	jack_get_sample_rate( /* JACK CLIENT */ client );
-	jack_get_buffer_size( /* JACK CLIENT */ client );
+	jack_get_sample_rate( /* JACK CLIENT */ clientCurrent );
+	jack_get_buffer_size( /* JACK CLIENT */ clientCurrent );
 #endif // NODESYNTH_JACK_COMPILE
 	Options::initialize(
 		/* Sample Rate */
@@ -146,3 +143,7 @@ NodeSynth::setOptions() {
 	);
 }
 
+void
+NodeSynth::setClient(jack_client_t * clientCurrent_n) {
+	clientCurrent = clientCurrent_n;
+}

@@ -28,6 +28,25 @@
 #endif // NODESYNTH_STANDALONE_COMPILE
 
 namespace nodesynth {
+#ifdef NODESYNTH_JACK_COMPILE
+	typedef struct {
+		jack_port_t * input_port;
+		jack_port_t * output_port_left;
+		jack_port_t * output_port_right;
+	} port_pair_t;
+	/**
+	 * This function is called every processing cycle
+	 * */
+	int inprocess(jack_nframes_t nframes, void * arg);
+	/**
+	 * Called when Nodesynth is set up within JACK
+	 * */
+	int jack_initialize(jack_client_t * client, const char * load_init);
+	/**
+	 * Called when Nodesynth is finished within JACK
+	 * */
+	void jack_finish(void * arg);
+#endif // NODESYNTH_JACK_COMPILE
 	class NodeSynth {
 	public:
 		NodeSynth();
@@ -38,7 +57,7 @@ namespace nodesynth {
 		void setOptions();
 	protected:
 #ifdef NODESYNTH_JACK_COMPILE
-		jack_client_t * client;
+
 #endif // NODESYNTH_JACK_COMPILE
 	private:
 		PresetParser * parser;

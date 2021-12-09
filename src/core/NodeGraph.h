@@ -84,6 +84,11 @@ namespace nodesynth {
 			MidiStream * eventsIn;
 			AudioDataStream * audioOutLeft;
 			AudioDataStream * audioOutRight;
+
+			// Output data streams
+			TimeDomainAudioStream * audioOutLeftTime;
+			TimeDomainAudioStream * audioOutRightTime;
+
 		protected:
 			/**
 			 * Updates all buffers in the node graph
@@ -98,9 +103,6 @@ namespace nodesynth {
 		private:
 			std::unordered_map<std::string, std::shared_ptr<Node>> graphMap;
 			std::shared_ptr<std::thread> workerThread;
-			// Output data streams
-			TimeDomainAudioStream * audioOutLeftTime;
-			TimeDomainAudioStream * audioOutRightTime;
 
 			std::vector<Node *> roots;
 

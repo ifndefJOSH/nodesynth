@@ -19,7 +19,6 @@ namespace nodesynth {
 	class TimeDomainAudioStream : public DataStream {
 	public:
 		TimeDomainAudioStream(const std::string name);
-		virtual void updateNext();
 		virtual void update();
 	protected:
 	private:

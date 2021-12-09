@@ -161,28 +161,28 @@ PrimitiveOscillatorNode::update() {
 		switch (waveformType) {
 			case WAVEFORMS::SAWTOOTH:
 				createSawToothWave(
-					frequencyFromMidiNote(notesIn->notes[i].note)
+					OscillatorNode::frequencyFromMidiNote(notesIn->notes[i].note)
 					, notesIn->notes[i].velocity
 					, i
 				);
 				break;
 			case WAVEFORMS::SQUARE:
 				createSquareWave(
-					frequencyFromMidiNote(notesIn->notes[i].note)
+					OscillatorNode::frequencyFromMidiNote(notesIn->notes[i].note)
 					, notesIn->notes[i].velocity
 					, i
 				);
 				break;
 			case WAVEFORMS::SINE:
 				createSineWave(
-					frequencyFromMidiNote(notesIn->notes[i].note)
+					OscillatorNode::frequencyFromMidiNote(notesIn->notes[i].note)
 					, notesIn->notes[i].velocity
 					, i
 				);
 				break;
 			case WAVEFORMS::TRIANGLE:
 				createTriangleWave(
-					frequencyFromMidiNote(notesIn->notes[i].note)
+					OscillatorNode::frequencyFromMidiNote(notesIn->notes[i].note)
 					, notesIn->notes[i].velocity
 					, i
 				);

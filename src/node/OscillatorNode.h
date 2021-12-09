@@ -23,7 +23,7 @@ namespace nodesynth {
 	class OscillatorNode : Node {
 	public:
 		OscillatorNode();
-		double frequencyFromMidiNote(uint8_t midiNote);
+		static double frequencyFromMidiNote(uint8_t midiNote);
 		virtual void connect(DataStream * ds, uint8_t port);
 		virtual void disconnect(uint8_t port);
 		ChanneledAudioDataStream out;

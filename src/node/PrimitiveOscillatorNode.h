@@ -32,7 +32,7 @@ namespace nodesynth {
 	};
 	 class PrimitiveOscillatorNode : OscillatorNode {
 	public:
-		PrimitiveOscillatorNode();
+		PrimitiveOscillatorNode(std::string name);
 		~PrimitiveOscillatorNode();
 	protected:
 		void createSawToothWave(

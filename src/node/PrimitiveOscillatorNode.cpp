@@ -6,7 +6,9 @@ using namespace nodesynth;
 
 #define MAX_AMPLITUDE 1.0
 
-PrimitiveOscillatorNode::PrimitiveOscillatorNode() {
+PrimitiveOscillatorNode::PrimitiveOscillatorNode(std::string name) :
+	OscillatorNode(name)
+{
 	// temporaryBuffers = new double[
 	// Default type for our waveforms
 	waveformType = WAVEFORMS::SAWTOOTH;

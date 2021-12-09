@@ -6,6 +6,13 @@
 
 using namespace nodesynth;
 
+OscillatorNode::OscillatorNode(std::string name) :
+	Node(name)
+	, out(name + "_out")
+{
+
+}
+
 void
 OscillatorNode::connect(DataStream * ds, uint8_t port) {
 	switch (port) {

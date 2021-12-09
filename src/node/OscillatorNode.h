@@ -22,7 +22,7 @@
 namespace nodesynth {
 	class OscillatorNode : Node {
 	public:
-		OscillatorNode();
+		OscillatorNode(std::string name);
 		static double frequencyFromMidiNote(uint8_t midiNote);
 		virtual void connect(DataStream * ds, uint8_t port);
 		virtual void disconnect(uint8_t port);

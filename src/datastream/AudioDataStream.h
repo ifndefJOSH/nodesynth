@@ -23,7 +23,6 @@ namespace nodesynth {
 	public:
 		AudioDataStream(const std::string name);
 		~AudioDataStream();
-		virtual void updateNext();
 		std::complex<double> * audio;
 	protected:
 	private:

@@ -77,13 +77,13 @@ namespace nodesynth {
 
 		static const uint8_t MAX_MIDI_CHANNELS = 32;
 	private:
-		static std::chrono::high_resolution_clock::time_point startTime;
-		static uint64_t sampleRate;
-		static uint64_t bufferSize;
-		static uint8_t midiChannelCount;
-		static bool verbose;
-		static bool silent; // Silent takes priority over verbose
-		static bool initialized; // Only allow initialized once
+		inline static std::chrono::high_resolution_clock::time_point startTime;
+		inline static uint64_t sampleRate;
+		inline static uint64_t bufferSize;
+		inline static uint8_t midiChannelCount;
+		inline static bool verbose;
+		inline static bool silent; // Silent takes priority over verbose
+		inline static bool initialized; // Only allow initialized once
 	};
 } // namespace nodesynth
 

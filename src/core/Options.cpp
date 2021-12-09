@@ -6,6 +6,15 @@
 
 using namespace nodesynth;
 
+// Static class members must be re-declared here
+// std::chrono::high_resolution_clock::time_point Options::startTime;
+// uint64_t Options::sampleRate;
+// uint64_t Options::bufferSize;
+// uint8_t Options::midiChannelCount;
+// bool Options::verbose;
+// bool Options::silent;
+// bool Options::initialized;
+
 void
 Options::initialize(uint64_t nSampleRate, uint64_t nBufferSize, uint8_t nMidiChannelCount){
 	sampleRate = nSampleRate;

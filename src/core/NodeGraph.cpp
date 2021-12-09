@@ -8,8 +8,8 @@ using namespace nodesynth;
 NodeGraph::NodeGraph()
 {
 	eventsIn = new MidiStream("EventsIn");
-	audioOutLeft = new AudioDataStream("AudioOutLeft");
-	audioOutRight = new AudioDataStream("AudioOutRight");
+	audioOutLeft = nullptr; // new AudioDataStream("AudioOutLeft");
+	audioOutRight = nullptr; // new AudioDataStream("AudioOutRight");
 	audioOutLeftTime = new TimeDomainAudioStream("AudioOutLeftTime");
 	audioOutRightTime = new TimeDomainAudioStream("AudioOutRightTime");
 
@@ -19,8 +19,6 @@ NodeGraph::NodeGraph()
 NodeGraph::~NodeGraph() {
 	destroyWorkerThread();
 	delete eventsIn;
-	delete audioOutLeft;
-	delete audioOutRight;
 	delete audioOutLeftTime;
 	delete audioOutRightTime;
 }
@@ -79,6 +77,7 @@ NodeGraph::destroyWorkerThread(){
 
 void
 NodeGraph::updateAllBuffers(){
+	eventsIn->update();
 	// Perform a breadth-first search to find the roots
 	for (Node * root : this->roots) {
 		this->findLeafs(root);
@@ -89,6 +88,8 @@ NodeGraph::updateAllBuffers(){
 			root->updateForward();
 		}
 	}
+	audioOutLeftTime->update();
+	audioOutRightTime->update();
 }
 
 void

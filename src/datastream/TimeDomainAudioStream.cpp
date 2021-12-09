@@ -2,6 +2,7 @@
 
 using namespace nodesynth;
 
-void TimeDomainAudioStream::updateNext() {
-	// TODO: update next
+void
+TimeDomainAudioStream::update() {
+
 }

@@ -26,6 +26,9 @@ inprocess(jack_nframes_t nframes, port_pair_t * arg) {
 
 int
 jack_initialize(jack_client_t * client, const char * load_init) {
+	// Set data for our NodeSynth
+	NodeSynth::init();
+
 	// Set the static client pointer
 	NodeSynth::setClient(client);
 
@@ -86,21 +89,34 @@ jack_finish(port_pair_t * arg) {
 	if (arg) {
 		delete arg;
 	}
+	NodeSynth::finish();
 }
 
 
 // Class-member methods
 
 NodeSynth::NodeSynth(){
-	this->setOptions();
-	graph = new NodeGraph();
-	parser = new PresetParser(graph);
+	// Intentionally left empty
 }
 
 NodeSynth::~NodeSynth(){
+	// Intentionally left empty
+}
+
+void
+NodeSynth::init() {
+	NodeSynth::setOptions();
+	graph = new NodeGraph();
+	parser = new PresetParser(graph);
+
+}
+
+void
+NodeSynth::finish() {
 	graph->destroyWorkerThread();
 	delete parser;
 	delete graph;
+
 }
 
 void

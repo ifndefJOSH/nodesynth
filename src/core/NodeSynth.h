@@ -49,22 +49,24 @@ namespace nodesynth {
 #endif // NODESYNTH_JACK_COMPILE
 	class NodeSynth {
 	public:
+		// Constructor and destructor are not used
 		NodeSynth();
 		~NodeSynth();
-		void startWorkerThread();
-		void readPresetFile(std::string file);
-		void writePresetFile(std::string file);
-		void setOptions();
+		// Most methods are static
+		static void init();
+		static void finish();
+		static void startWorkerThread();
+		static void readPresetFile(std::string file);
+		static void writePresetFile(std::string file);
+		static void setOptions();
 #ifdef NODESYNTH_JACK_COMPILE
 		static void setClient(jack_client_t * clientCurrent_n);
-#endif // NODESYNTH_JACK_COMPILE
 	protected:
-#ifdef NODESYNTH_JACK_COMPILE
 		inline static jack_client_t * clientCurrent;
 #endif // NODESYNTH_JACK_COMPILE
 	private:
-		PresetParser * parser;
-		NodeGraph * graph;
+		inline static PresetParser * parser;
+		inline static NodeGraph * graph;
 	};
 } // nodesynth
 

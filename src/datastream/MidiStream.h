@@ -24,11 +24,11 @@ namespace nodesynth {
 		bool on;
 		double velocity;
 	};
-	class MidiStream : DataStream {
+	class MidiStream : public DataStream {
 	public:
 		MidiStream(const std::string name);
 		~MidiStream();
-		void update();
+		virtual void update();
 		MidiNote * notes;
 	protected:
 	private:

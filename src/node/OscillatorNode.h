@@ -20,7 +20,7 @@
 #include "../datastream/ChanneledAudioDataStream.h"
 
 namespace nodesynth {
-	class OscillatorNode : Node {
+	class OscillatorNode : protected Node {
 	public:
 		OscillatorNode(std::string name);
 		static double frequencyFromMidiNote(uint8_t midiNote);

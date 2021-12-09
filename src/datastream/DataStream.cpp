@@ -14,4 +14,7 @@ DataStream::getName() {
 	return name;
 }
 
-
+void
+DataStream::update() {
+	// Intentionally left empty
+}

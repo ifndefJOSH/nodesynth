@@ -10,7 +10,7 @@ OscillatorNode::OscillatorNode(std::string name) :
 	Node(name)
 	, out(name + "_out")
 {
-
+	streams.push_back(&out);
 }
 
 void

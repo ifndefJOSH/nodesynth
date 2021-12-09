@@ -44,12 +44,17 @@ namespace nodesynth {
 		 * @param port The port to disconnect
 		 * */
 		virtual void disconnect(uint8_t port) = 0;
+		/**
+		 * Updates all of our datastreams
+		 * */
+		void updateAllStreams();
 		// Data so that the NodeGraph can perform a DFS and run it
 		std::vector<Node *> parents;
 		std::vector<Node *> children;
 		// Number of children that have been updated (must equal length of children)
 		uint8_t numChildrenSinceLastUpdate;
 		bool visited;
+		std::vector<DataStream *> streams;
 	protected:
 		void addDataStreamToPorts(std::shared_ptr<DataStream> ds);
 	private:

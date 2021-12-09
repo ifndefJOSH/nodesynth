@@ -43,6 +43,7 @@ namespace nodesynth {
 		DataStream(const std::string name, streamtype type = UNDEFINED_TYPE);
 		const streamtype getStreamType();
 		std::string getName();
+		virtual void update();
 	protected:
 		const streamtype type;
 	private:

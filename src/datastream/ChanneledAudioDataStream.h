@@ -19,7 +19,7 @@
 #include <complex>
 
 namespace nodesynth {
-	 class ChanneledAudioDataStream : DataStream {
+	 class ChanneledAudioDataStream : public DataStream {
 	public:
 		ChanneledAudioDataStream(const std::string name);
 		~ChanneledAudioDataStream();

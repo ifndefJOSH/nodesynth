@@ -157,6 +157,7 @@ PrimitiveOscillatorNode::createTriangleWave(
 
 void
 PrimitiveOscillatorNode::update() {
+	updateAllStreams();
 	// For each MIDI channel in notesIn
 	for (uint8_t i = 0; i < Options::getMidiChannelCount(); i++) {
 		// Read the MIDI note and update the appropriate channel

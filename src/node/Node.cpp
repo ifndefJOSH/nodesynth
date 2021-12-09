@@ -23,6 +23,12 @@ Node::addDataStreamToPorts(std::shared_ptr<DataStream> ds) {
 }
 
 void
+Node::updateAllStreams() {
+	for (DataStream * stream : streams) {
+		stream->update();
+	}
+}
+void
 Node::updateForward() {
 	// Don't update until all children have been update
 	if (numChildrenSinceLastUpdate != this->children.size() - 1) {

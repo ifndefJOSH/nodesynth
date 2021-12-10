@@ -8,3 +8,9 @@ FilterNode::FilterNode(std::string name)
 {
 
 }
+
+
+void
+FilterNode::initializePorts() {
+	// TODO
+}

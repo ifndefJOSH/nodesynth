@@ -9,7 +9,7 @@
  * which aims to create a declarative Prolog-like language for musical synthesis. Eventually, I
  * also plan to create a GUI, similar to those in Blender, Natron, or Carla.
  **/
-		
+
 
 #ifndef FILTERNODE_H_INCLUDED
 #define FILTERNODE_H_INCLUDED

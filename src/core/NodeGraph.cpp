@@ -13,7 +13,6 @@ NodeGraph::NodeGraph()
 	audioOutLeftTime = new TimeDomainAudioStream("AudioOutLeftTime");
 	audioOutRightTime = new TimeDomainAudioStream("AudioOutRightTime");
 
-
 }
 
 NodeGraph::~NodeGraph() {
@@ -21,6 +20,8 @@ NodeGraph::~NodeGraph() {
 	delete eventsIn;
 	delete audioOutLeftTime;
 	delete audioOutRightTime;
+	fftw_execute(pLeft);
+	fftw_execute(pRight);
 }
 
 std::shared_ptr<Node>
@@ -63,6 +64,39 @@ NodeGraph::connectPorts(
 	std::shared_ptr<Node> toNode = getNodeByName(toNodeId);
 	return true; // TODO: fix
 }
+
+void
+NodeGraph::connectToLeftOutput(AudioDataStream * left) {
+	audioOutLeft = left;
+	// Set up fftw
+	fftw_destroy_plan(pLeft);
+	pLeft = fftw_plan_dft_1d(
+		Options::getBufferSize()
+		, reinterpret_cast<fftw_complex *> ( /* Input buffer */ left->audio )
+		, reinterpret_cast<fftw_complex *> ( /* Output buffer */ audioOutLeftTime->audio )
+		, FFTW_FORWARD
+		, FFTW_ESTIMATE
+	);
+
+}
+
+void
+NodeGraph::connectToRightOutput(AudioDataStream * right) {
+
+	audioOutRight = right;
+	// Re-set fft
+	fftw_destroy_plan(pRight);
+	pRight = fftw_plan_dft_1d(
+		Options::getBufferSize()
+		, reinterpret_cast<fftw_complex *> ( /* Input buffer */ right->audio )
+		, reinterpret_cast<fftw_complex *> ( /* Output buffer */ audioOutRightTime->audio )
+		, FFTW_FORWARD
+		, FFTW_ESTIMATE
+	);
+
+
+}
+
 void
 NodeGraph::createWorkerThread(){
 	// Bind worker thread to function
@@ -88,8 +122,13 @@ NodeGraph::updateAllBuffers(){
 			root->updateForward();
 		}
 	}
+	// IFFT and move to audioOutLeftTime and audioOutRightTime
+	fftw_execute(pLeft);
+	fftw_execute(pRight);
+	// Update Time domain stuff
 	audioOutLeftTime->update();
 	audioOutRightTime->update();
+
 }
 
 void

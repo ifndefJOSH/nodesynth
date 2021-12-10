@@ -1,12 +1,16 @@
 #include "NodeSynth.h"
 #include "cli/messages.h"
 
+#include <fftw3.h>
+
 #define DEFAULT_SAMPLE_RATE 441000
 #define DEFAULT_BUFFER_SIZE 2048
 #define DEFAULT_MIDI_CHANNEL_COUNT 8
 
+
 using namespace nodesynth;
 
+#ifdef NODESYNTH_JACK_COMPILE
 // Non-class functions
 
 int
@@ -19,13 +23,17 @@ inprocess(jack_nframes_t nframes, port_pair_t * arg) {
 	jack_default_audio_sample_t * in =
 			(jack_default_audio_sample_t *) jack_port_get_buffer(pp->input_port, nframes);
 
-	// TODO: Get the output from the NodeGraph
-
+	// Get the output from the NodeGraph
+	for (int i = 0; i < nframes; ++i) {
+		out_left[i] = (jack_default_audio_sample_t) NodeSynth::graph->audioOutLeftTime->audio[i].real();
+		out_right[i] = (jack_default_audio_sample_t) NodeSynth::graph->audioOutRightTime->audio[i].real();
+	}
 	return 0;
 }
 
 int
 jack_initialize(jack_client_t * client, const char * load_init) {
+
 	// Set data for our NodeSynth
 	NodeSynth::init();
 
@@ -91,7 +99,7 @@ jack_finish(port_pair_t * arg) {
 	}
 	NodeSynth::finish();
 }
-
+#endif // NODESYNTH_JACK_COMPILE
 
 // Class-member methods
 

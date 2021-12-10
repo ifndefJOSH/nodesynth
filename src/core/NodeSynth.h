@@ -59,6 +59,7 @@ namespace nodesynth {
 		static void readPresetFile(std::string file);
 		static void writePresetFile(std::string file);
 		static void setOptions();
+		inline static NodeGraph * graph;
 #ifdef NODESYNTH_JACK_COMPILE
 		static void setClient(jack_client_t * clientCurrent_n);
 	protected:
@@ -66,7 +67,6 @@ namespace nodesynth {
 #endif // NODESYNTH_JACK_COMPILE
 	private:
 		inline static PresetParser * parser;
-		inline static NodeGraph * graph;
 	};
 } // nodesynth
 

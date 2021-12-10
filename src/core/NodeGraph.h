@@ -22,6 +22,7 @@
 #include <string>			// Used for map keys
 #include <vector>			// Used for clearWithoutDeleting
 #include <thread>			// Used for worker thread
+#include <fftw3.h>			// For Fast Fourier transform
 
 namespace nodesynth {
 	class NodeGraph {
@@ -73,6 +74,18 @@ namespace nodesynth {
 				, std::string toNodePortId
 			);
 			/**
+			 * connects a data stream to the left output
+			 *
+			 * @param left the audio stream to connect
+			 * */
+			void connectToLeftOutput(AudioDataStream * left);
+			/**
+			 * connects a data stream to the right output
+			 *
+			 * @param right the audio stream to connect
+			 * */
+			void connectToRightOutput(AudioDataStream * right);
+			/**
 			 * Creates the worker thread.
 			 * */
 			void createWorkerThread();
@@ -104,6 +117,7 @@ namespace nodesynth {
 			std::unordered_map<std::string, std::shared_ptr<Node>> graphMap;
 			std::shared_ptr<std::thread> workerThread;
 
+			fftw_plan pLeft, pRight;
 			std::vector<Node *> roots;
 
 	};

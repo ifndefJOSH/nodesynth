@@ -15,11 +15,15 @@
 
 #include "DataStream.h"
 
+#include <complex>
+
 namespace nodesynth {
 	class TimeDomainAudioStream : public DataStream {
 	public:
 		TimeDomainAudioStream(const std::string name);
+		~TimeDomainAudioStream();
 		virtual void update();
+		std::complex<double> * audio;
 	protected:
 	private:
 	};

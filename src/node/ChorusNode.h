@@ -20,6 +20,8 @@ namespace nodesynth {
 	 class ChorusNode : Node {
 	public:
 		ChorusNode(const std::string name);
+		virtual void initializePorts();
+		virtual void update();
 	protected:
 	private:
 	};

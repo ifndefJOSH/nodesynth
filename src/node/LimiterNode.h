@@ -19,7 +19,9 @@
 namespace nodesynth {
 	class LimiterNode : Node {
 	public:
-		LimiterNode();
+		LimiterNode(std::string name);
+		virtual void initializePorts();
+		virtual void update();
 	protected:
 	private:
 	};

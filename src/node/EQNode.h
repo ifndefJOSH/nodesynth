@@ -20,6 +20,8 @@ namespace nodesynth {
 	 class EQNode : FilterNode {
 	public:
 		EQNode(const std::string name);
+		virtual void initializePorts();
+		virtual void update();
 	protected:
 	private:
 	};

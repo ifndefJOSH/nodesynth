@@ -9,7 +9,7 @@
  * which aims to create a declarative Prolog-like language for musical synthesis. Eventually, I
  * also plan to create a GUI, similar to those in Blender, Natron, or Carla.
  **/
-		
+
 
 #ifndef MODULATORNODE_H_INCLUDED
 #define MODULATORNODE_H_INCLUDED
@@ -19,7 +19,9 @@
 namespace nodesynth {
 	 class ModulatorNode : Node {
 	public:
-		ModulatorNode();
+		ModulatorNode(std::string name);
+		virtual void initializePorts();
+		virtual void update() = 0;
 	protected:
 	private:
 	};

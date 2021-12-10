@@ -19,7 +19,9 @@
 namespace nodesynth {
 	 class PrimitiveFilterNode : FilterNode {
 	public:
-		PrimitiveFilterNode();
+		PrimitiveFilterNode(std::string name);
+		virtual void initializePorts();
+		virtual void update();
 	protected:
 	private:
 	};

@@ -19,7 +19,9 @@
 namespace nodesynth {
 	 class FormantNode : FilterNode {
 	public:
-		FormantNode();
+		FormantNode(std::string name);
+		virtual void initializePorts();
+		virtual void update();
 	protected:
 	private:
 	};

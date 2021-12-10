@@ -19,7 +19,10 @@
 namespace nodesynth {
 	 class FilterNode : Node {
 	public:
-		FilterNode();
+		FilterNode(std::string name);
+		virtual void initializePorts();
+		// Filter node is still abstract
+		virtual void update() = 0;
 	protected:
 	private:
 	};

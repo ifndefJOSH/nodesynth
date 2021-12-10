@@ -19,7 +19,8 @@
 namespace nodesynth {
 	 class WavetableOscillatorNode : OscillatorNode {
 	public:
-		WavetableOscillatorNode();
+		WavetableOscillatorNode(std::string name);
+		virtual void update();
 	protected:
 	private:
 	};

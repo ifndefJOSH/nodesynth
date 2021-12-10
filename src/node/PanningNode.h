@@ -19,7 +19,9 @@
 namespace nodesynth {
 	 class PanningNode : Node {
 	public:
-		PanningNode();
+		PanningNode(std::string name);
+		virtual void initializePorts();
+		virtual void update();
 	protected:
 	private:
 	};

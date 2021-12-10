@@ -19,7 +19,9 @@
 namespace nodesynth {
 	 class FMModulatorNode : ModulatorNode {
 	public:
-		FMModulatorNode();
+		FMModulatorNode(std::string name);
+		virtual void initializePorts();
+		virtual void update();
 	protected:
 	private:
 	};

@@ -20,6 +20,8 @@ namespace nodesynth {
 	 class CompressorNode : Node {
 	public:
 		CompressorNode(const std::string name);
+		virtual void initializePorts();
+		virtual void update();
 	protected:
 	private:
 	};

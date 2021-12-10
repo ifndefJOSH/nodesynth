@@ -19,7 +19,9 @@
 namespace nodesynth {
 	 class ResamplerNode : Node {
 	public:
-		ResamplerNode();
+		ResamplerNode(std::string name);
+		virtual void initializePorts();
+		virtual void update();
 	protected:
 	private:
 	};

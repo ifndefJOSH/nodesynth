@@ -9,7 +9,7 @@
  * which aims to create a declarative Prolog-like language for musical synthesis. Eventually, I
  * also plan to create a GUI, similar to those in Blender, Natron, or Carla.
  **/
-		
+
 
 #ifndef SAMPLERNODE_H_INCLUDED
 #define SAMPLERNODE_H_INCLUDED
@@ -19,7 +19,8 @@
 namespace nodesynth {
 	 class SamplerNode : OscillatorNode {
 	public:
-		SamplerNode();
+		SamplerNode(std::string name);
+		virtual void update();
 	protected:
 	private:
 	};

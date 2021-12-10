@@ -27,6 +27,7 @@ namespace nodesynth {
 		virtual void connect(DataStream * ds, uint8_t port);
 		virtual void disconnect(uint8_t port);
 		ChanneledAudioDataStream out;
+		virtual void initializePorts();
 		// OscillatorNode is still Abstract
 		virtual void update() = 0;
 	protected:

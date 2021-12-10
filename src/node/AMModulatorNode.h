@@ -20,6 +20,7 @@ namespace nodesynth {
 	 class AMModulatorNode : ModulatorNode {
 	public:
 		AMModulatorNode(const std::string name);
+		virtual void update();
 	protected:
 	private:
 	};

@@ -24,9 +24,13 @@ namespace nodesynth {
 		virtual void initializePorts();
 		// Filter node is still abstract
 		virtual void update() = 0;
+
+		void setFilterInputStream(PrimitiveDataStream<double> * filterValue);
+		void setAudioInputStream(AudioDataStream * audio);
 	protected:
 	private:
-		PrimitiveDataStream<double> * inputData;
+		PrimitiveDataStream<double> * filterValue;
+		AudioDataStream * audio;
 	};
 } // namespace nodesynth
 #endif // FILTERNODE_H_INCLUDED

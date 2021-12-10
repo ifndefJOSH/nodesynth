@@ -8,7 +8,7 @@ using namespace nodesynth;
 
 OscillatorNode::OscillatorNode(std::string name) :
 	Node(name)
-	, out(name + "_out")
+	, out(name + ":out")
 {
 	streams.push_back(&out);
 }

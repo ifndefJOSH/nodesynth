@@ -9,10 +9,10 @@ FilterNode::FilterNode(std::string name)
 
 }
 
-
 void
 FilterNode::initializePorts() {
-	// TODO
+
+	filteredAudio = new AudioDataStream(getName() + ":out");
 }
 
 

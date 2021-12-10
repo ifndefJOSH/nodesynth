@@ -15,7 +15,7 @@
 #define FILTERNODE_H_INCLUDED
 
 #include "Node.h"
-#include "../datastream/PrimitiveDataStream.h"
+#include "../datastream/AudioDataStream.h"
 
 namespace nodesynth {
 	 class FilterNode : Node {
@@ -24,12 +24,14 @@ namespace nodesynth {
 		virtual void initializePorts();
 		// Filter node is still abstract
 		virtual void update() = 0;
-
-		void setFilterInputStream(PrimitiveDataStream<double> * filterValue);
+		// Sets the input streams
+		void setFilterInputStream(AudioDataStream * filterValue);
 		void setAudioInputStream(AudioDataStream * audio);
+		// Output streams
+		AudioDataStream * filteredAudio;
 	protected:
 	private:
-		PrimitiveDataStream<double> * filterValue;
+		AudioDataStream * filterValue;
 		AudioDataStream * audio;
 	};
 } // namespace nodesynth

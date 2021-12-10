@@ -39,3 +39,9 @@ double
 OscillatorNode::frequencyFromMidiNote(uint8_t midiNote) {
 	return TUNING * pow(2, ((double) midiNote - 69.0) / 12);
 }
+
+
+void
+OscillatorNode::initializePorts() {
+	// Intentionally left empty
+}

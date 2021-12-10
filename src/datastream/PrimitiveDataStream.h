@@ -27,6 +27,7 @@ namespace nodesynth {
 	protected:
 	private:
 		T valueThisCycle;
+		bool updated;
 	};
 } // namespace nodesynth
 

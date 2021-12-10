@@ -15,6 +15,7 @@
 #define FILTERNODE_H_INCLUDED
 
 #include "Node.h"
+#include "../datastream/PrimitiveDataStream.h"
 
 namespace nodesynth {
 	 class FilterNode : Node {
@@ -25,6 +26,7 @@ namespace nodesynth {
 		virtual void update() = 0;
 	protected:
 	private:
+		PrimitiveDataStream<double> * inputData;
 	};
 } // namespace nodesynth
 #endif // FILTERNODE_H_INCLUDED

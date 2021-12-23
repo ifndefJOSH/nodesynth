@@ -9,7 +9,7 @@
  * which aims to create a declarative Prolog-like language for musical synthesis. Eventually, I
  * also plan to create a GUI, similar to those in Blender, Natron, or Carla.
  **/
-		
+
 
 #ifndef ONEPOLEFILTER_H_INCLUDED
 #define ONEPOLEFILTER_H_INCLUDED
@@ -20,7 +20,13 @@ namespace nodesynth {
 	 class OnePoleFilter {
 	public:
 		OnePoleFilter();
+		virtual void createFilter();
 	protected:
+		void createLowpass();
+		void createHighpass();
+		void createBandpass();
+		void createBandreject();
+
 	private:
 	};
 } // namespace nodesynth

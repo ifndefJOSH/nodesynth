@@ -48,3 +48,23 @@ Filter::frequencyToSampleLocation(double frequency) {
 	return (uint64_t) frequency / bandwidthPerBuffer;
 }
 
+void
+Filter::setCutoff1(double cutoff) {
+	cutoff1 = cutoff;
+}
+
+double
+Filter::getCutoff1() {
+	return cutoff1;
+}
+
+void
+Filter::setCutoff2(double cutoff) {
+	cutoff2 = cutoff;
+}
+
+double
+Filter::getCutoff2() {
+	return cutoff2;
+}
+

@@ -34,7 +34,11 @@ namespace nodesynth {
 		void applyFilter(AudioDataStream & source, AudioDataStream & dest);
 		filter_type_t getFilterType();
 		void setFilterType(filter_type_t type);
-		uint64_t frequencyToSampleLocation(double frequency);
+		static uint64_t frequencyToSampleLocation(double frequency);
+		void setCutoff1(double cutoff);
+		double getCutoff1();
+		void setCutoff2(double cutoff);
+		double getCutoff2();
 	protected:
 		filter_type_t filterType;
 		double * filter;

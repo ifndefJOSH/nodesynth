@@ -1,17 +1,28 @@
-#include "OnePoleFilter.h"
+#include "GeneralFilter.h"
 
 #include "../core/cli/messages.h"
 
 using namespace nodesynth;
 
-OnePoleFilter::OnePoleFilter()
+GeneralFilter::GeneralFilter()
 	: Filter()
+	, resonance(0.0)
 {
 
 }
 
 void
-OnePoleFilter::createFilter() {
+GeneralFilter::setNumPoles(uint8_t numPoles) {
+	numberPoles = numPoles;
+}
+
+uint8_t
+GeneralFilter::getNumPoles() {
+	return numberPoles;
+}
+
+void
+GeneralFilter::createFilter() {
 	switch (filterType) {
 		case FilterTypes::LOWPASS:
 			createLowpass();
@@ -31,22 +42,22 @@ OnePoleFilter::createFilter() {
 }
 
 void
-OnePoleFilter::createLowpass() {
+GeneralFilter::createLowpass() {
 
 }
 
 void
-OnePoleFilter::createHighpass() {
+GeneralFilter::createHighpass() {
 
 }
 
 void
-OnePoleFilter::createBandpass() {
+GeneralFilter::createBandpass() {
 
 }
 
 void
-OnePoleFilter::createBandreject() {
+GeneralFilter::createBandreject() {
 
 }
 

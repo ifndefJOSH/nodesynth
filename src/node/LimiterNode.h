@@ -9,12 +9,14 @@
  * which aims to create a declarative Prolog-like language for musical synthesis. Eventually, I
  * also plan to create a GUI, similar to those in Blender, Natron, or Carla.
  **/
-		
+
 
 #ifndef LIMITERNODE_H_INCLUDED
 #define LIMITERNODE_H_INCLUDED
 
 #include "Node.h"
+
+#include "../datastream/AudioDataStream.h"
 
 namespace nodesynth {
 	class LimiterNode : Node {
@@ -22,8 +24,15 @@ namespace nodesynth {
 		LimiterNode(std::string name);
 		virtual void initializePorts();
 		virtual void update();
+		double getLimit();
+		void setLimit(double lim);
+		void setInputStream(AudioDataStream * input);
+		AudioDataStream * outputStream;
 	protected:
+
 	private:
+		double limit;
+		AudioDataStream * inputStream;
 	};
 } // namespace nodesynth
 #endif // LIMITERNODE_H_INCLUDED

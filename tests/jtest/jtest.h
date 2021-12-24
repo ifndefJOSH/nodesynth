@@ -12,6 +12,8 @@ public:
 	static void assert_gte(T a, T b);
 	static void assert_lt(T a, T b);
 	static void assert_lte(T a, T b);
+	static void assert_test_pass(std::string name);
+	static void assert_test_fail(std::string name);
 };
 
 

@@ -133,8 +133,22 @@ JTest<T>::assert_lte(T a, T b) {
 
 }
 
+template <typename T>
+void
+JTest<T>::assert_test_pass(std::string name) {
+	std::cout << "[PASSED] Passed test " << name << std::endl;
+	passed_tests++;
+}
+
+template <typename T>
+void
+JTest<T>::assert_test_fail(std::string name) {
+	std::cout << "[FAILED] Failed test " << name << std::endl;
+	failed_tests++;
+}
 
 // #include <complex.h>
 // Forward-declare (explicit instantiation) classes
 template class JTest<double>;
+template class JTest<int>
 // template class JTest<std::complex<double>>;

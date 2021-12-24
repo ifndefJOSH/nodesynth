@@ -25,16 +25,44 @@ void
 GeneralFilter::createFilter() {
 	switch (filterType) {
 		case FilterTypes::LOWPASS:
-			createLowpass();
+			info("Filter type is FilterTypes::LOWPASS");
+			warning("This filter type \"FilterTypes::LOWPASS\" is not supported by GeneralFilter. Defaulting to 12 dB lowpass");
+			// TODO: Create default filter
 			break;
 		case FilterTypes::HIGHPASS:
-			createHighpass();
+			info("Filter type is FilterTypes::HIGHPASS");
+			warning("This filter type \"FilterTypes::HIGHPASS\" is not supported by GeneralFilter. Defaulting to 12 dB highpass");
+			// TODO: Create default filter
 			break;
 		case FilterTypes::BANDPASS:
-			createBandpass();
-			break;
+			info("Filter type is FilterTypes::BANDPASS");
 		case FilterTypes::BANDREJECT:
-			createBandreject();
+			info("Filter type is FilterTypes::BANDREJECT");
+			errorExit("The filter type given is not a GeneralFilterType, but is an (unsupported FilterType).");
+			break;
+		case GeneralFilterTypes::LOWPASS_12:
+			info("Filter type is GeneralFilterTypes::LOWPASS_12");
+			createLowpass(TWELVE_DB);
+			break;
+		case GeneralFilterTypes::LOWPASS_24:
+			info("Filter type is GeneralFilterTypes::LOWPASS_24");
+			createLowpass(TWENTYFOUR_DB);
+			break;
+		case GeneralFilterTypes::LOWPASS_48:
+			info("Filter type is GeneralFilterTypes::LOWPASS_48");
+			createLowpass(FOURTYEIGHT_DB);
+			break;
+		case GeneralFilterTypes::HIGHPASS_12:
+			info("Filter type is GeneralFilterTypes::HIGHPASS_12");
+			createHighpass(TWELVE_DB);
+			break;
+		case GeneralFilterTypes::HIGHPASS_24:
+			info("Filter type is GeneralFilterTypes::HIGHPASS_24");
+			createHighpass(TWENTYFOUR_DB);
+			break;
+		case GeneralFilterTypes::HIGHPASS_48:
+			info("Filter type is GeneralFilterTypes::HIGHPASS_48");
+			createHighpass(FOURTYEIGHT_DB);
 			break;
 		default:
 			errorExit("Filter type is not known!");
@@ -42,22 +70,34 @@ GeneralFilter::createFilter() {
 }
 
 void
-GeneralFilter::createLowpass() {
+GeneralFilter::createLowpass(decay_speed_t decaySpeed) {
+	if (decaySpeed == TWELVE_DB) {
 
+	}
+	else if (decaySpeed == TWENTYFOUR_DB) {
+
+	}
+	else if (decaySpeed == FOURTYEIGHT_DB) {
+
+	}
+	else {
+		errorExit("Decay speed is not known!");
+	}
 }
 
 void
-GeneralFilter::createHighpass() {
+GeneralFilter::createHighpass(decay_speed_t decaySpeed) {
+	if (decaySpeed == TWELVE_DB) {
 
-}
+	}
+	else if (decaySpeed == TWENTYFOUR_DB) {
 
-void
-GeneralFilter::createBandpass() {
+	}
+	else if (decaySpeed == FOURTYEIGHT_DB) {
 
-}
-
-void
-GeneralFilter::createBandreject() {
-
+	}
+	else {
+		errorExit("Decay speed is not known!");
+	}
 }
 

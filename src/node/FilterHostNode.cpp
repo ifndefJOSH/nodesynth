@@ -31,3 +31,14 @@ void
 FilterHostNode::makeLive(bool lv = true) {
 	live = lv;
 }
+
+
+void
+FilterHostNode::setFilter(Filter * f) {
+	filter = f;
+}
+
+Filter *
+FilterHostNode::getFilter() {
+	return filter;
+}

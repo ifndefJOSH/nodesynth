@@ -39,6 +39,18 @@ namespace nodesynth {
 		 *  @param lv Whether or not this filter host is to be live
 		 * */
 		void makeLive(bool lv = true);
+		/**
+		 * Allows you to set a filter
+		 *
+		 * @param f Filter to set
+		 * */
+		void setFilter(Filter * f);
+		/**
+		 * Gets this node's current filter
+		 *
+		 * @return current filter
+		 * */
+		Filter * getFilter();
 		// Output streams
 		AudioDataStream * filterValue;
 	protected:
